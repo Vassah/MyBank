@@ -1,4 +1,4 @@
-package TP_PROJECT.Model;
+package TP_PROJECT.Models.AccountModels;
 
 import TP_PROJECT.Model.Account;
 

@@ -1,4 +1,4 @@
-package TP_PROJECT.Controller;
+package TP_PROJECT.Controllers;
 
 import TP_PROJECT.Model.User;
 
