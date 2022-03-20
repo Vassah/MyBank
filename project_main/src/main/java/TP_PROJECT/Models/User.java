@@ -1,5 +1,8 @@
 package TP_PROJECT.Models;
 
+import TP_PROJECT.Models.TransactionModels.*;
+import TP_PROJECT.Models.AccountModels.*;
+
 public class User {
     public long id;
     public Transaction[] Transactions;
@@ -8,11 +11,12 @@ public class User {
     public String LastName;
     public String MiddleName;
     
-    public User(){
+    public User()
+    {
 
     }
 
-    public String ShortName() { return LastName + String.ValueOf(FirstName[0]) + ".";}
-    public String FullName() { return FirstName + MiddleName + LastName; }
+    public String shortName() { return LastName + String.valueOf(FirstName.toCharArray()[0]) + ".";}
+    public String fullName() { return FirstName + MiddleName + LastName; }
 
 }

@@ -1,5 +1,7 @@
 package TP_PROJECT.Models.TransactionModels;
-java.time;
+
+import TP_PROJECT.Models.*;
+import TP_PROJECT.Models.AccountModels.*;
 
 public class MyBankOnlyTransaction extends Transaction{
     User Sender;
@@ -14,6 +16,6 @@ public class MyBankOnlyTransaction extends Transaction{
     
     public String ToString()
     {
-        return String.Format("Номер счёта отправителя: %d \n Номер счёта получателя: $d \n ФИО получателя: %s \n Время отправки: %t", SenderAccount.Number, RecieverAccount.Number, Reciever.ShortName(), time);
+        return String.format("Номер счёта отправителя: %d \n Номер счёта получателя: $d \n ФИО получателя: %s \n Время отправки: %t", SenderAccount.Number, RecieverAccount.Number, Reciever.shortName(), time);
     }
 }
