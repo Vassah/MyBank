@@ -1,4 +1,6 @@
 package TP_PROJECT.Models.TransactionModels;
+import TP_PROJECT.Models.*;
+
 public class OtherBankTransaction extends Transaction{
     public User MyBankUser;
     public long SenderAccountNumber;
@@ -12,11 +14,6 @@ public class OtherBankTransaction extends Transaction{
 
     public String ToString()
     {
-        return String.Format("Номер счёта отправителя: %d \n Номер счёта получателя: $d \n Время отправки: %t", SenderAccount.Number, RecieverAccount.Number, time);
+        return String.format("Номер счёта отправителя: %d \n Номер счёта получателя: $d \n Время отправки: %t", SenderAccountNumber, RecieverAccountNumber, time);
     }
-}
-public enum SendRecieveStatus
-{
-    Send,
-    Recieve
 }
