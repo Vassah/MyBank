@@ -3,8 +3,6 @@ import com.Vassah.MyBank.Models.*;
 
 public class OtherBankTransaction extends Transaction{
     public User MyBankUser;
-    public long SenderAccountNumber;
-    public long RecieverAccountNumber;
     public SendRecieveStatus status;
 
     public OtherBankTransaction()

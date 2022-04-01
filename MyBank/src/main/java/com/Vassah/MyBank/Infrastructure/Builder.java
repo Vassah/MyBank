@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Controllers;
+package com.Vassah.MyBank.Infrastructure;
 
 public class Builder 
 {
