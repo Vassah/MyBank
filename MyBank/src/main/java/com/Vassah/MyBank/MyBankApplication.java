@@ -10,5 +10,8 @@ public class MyBankApplication {
 		SpringApplication.run(MyBankApplication.class, args);
 	}
 
+<<<<<<< HEAD
 } 
-
+=======
+}
+>>>>>>> checkpoint_1

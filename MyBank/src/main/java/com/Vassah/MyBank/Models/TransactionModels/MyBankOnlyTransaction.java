@@ -13,6 +13,11 @@ public class MyBankOnlyTransaction extends Transaction{
     {
 
     }
+
+    public MyBankOnlyTransaction(Transaction tr)
+    {
+        
+    }
     
     public String ToString()
     {
