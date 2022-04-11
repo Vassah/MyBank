@@ -1,12 +1,12 @@
-package com.Vassah.MyBank.Models.TransactionModels;
+package com.Vassah.MyBank.Repositories;
 
 import java.util.ArrayList;
 
-public class TransactionRepository extends ITransactionRepository {
+public class TransactionRepositoryImp implements TransactionRepository {
 
     public ArrayList<Transaction> Transactions;
 
-    public TransactionRepository(){
+    public TransactionRepositoryImp(){
         Transactions = new ArrayList<Transaction>();
     }
 
@@ -21,9 +21,9 @@ public class TransactionRepository extends ITransactionRepository {
     {
         for (Transaction tr : Transactions)
         {
-            if (tr.id == id) return tr;
+            if (tr.Id == id) return tr;
         }
-        return new MyBankOnlyTransaction();
+        return new Transaction();
     }
 
     
