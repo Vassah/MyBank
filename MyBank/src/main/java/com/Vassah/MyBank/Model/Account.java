@@ -4,20 +4,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Currency;
 
 @Entity
 public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public long Number;
+    private long number;
 
-    public User User;
+    private User user;
     
-    public long Balance;
+    private Currency balance;
     
-    public Transaction[] Transactions;
+    private Transaction[] transactions;
 
-    public abstract void withdrawal();
-    public abstract void replenishment();
+    private Card card;
+
+    private AccountStatus status;
+
+    protected Account(){};
 
 }

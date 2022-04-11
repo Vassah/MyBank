@@ -11,22 +11,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
-    public Account[] accounts;
+    private Account[] accounts;
 
-    public String firstName;
+    private String firstName;
 
-    public String lastName;
+    private String lastName;
 
-    public String middleName;
+    private String middleName;
 
-    public String passwordHash;
+    private String passwordHash;
+
+    private BankStatus status;
     
-    public User()
+    protected User()
     {
 
     }
 
     public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
+
     public String fullName() { return firstName + middleName + lastName; }
 
 }

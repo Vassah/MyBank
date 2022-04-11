@@ -5,17 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Currency;
 
 @Entity
 public class Transaction{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    long Id;
+    private long id;
 
-    float Amount;
-    long SenderAccountNumber;
-    long RecieverAccountNumber;
-    OffsetDateTime time;
+    private Currency amount;
+
+    private long senderAccountNumber;
+    
+    private long recieverAccountNumber;
+    
+    private OffsetDateTime proccesTime;
+
+    private TransactionType type;
 
     protected Transaction() {}
 
