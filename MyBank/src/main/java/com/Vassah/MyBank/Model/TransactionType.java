@@ -1,6 +1,6 @@
 package com.Vassah.MyBank.Model;
 
-public enum BankStatus {
+public enum TransactionType {
     MyBankOnly,
     ToOtherBank,
     FromOtherBank

@@ -21,7 +21,9 @@ public class User {
 
     private String passwordHash;
 
-    private BankStatus status;
+    private String phoneNumber;
+
+    private TransactionType status;
     
     protected User()
     {
