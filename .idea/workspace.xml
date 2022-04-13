@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5a215351-b725-4ef4-bb0e-65d8a9ed200c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Controllers/AccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Controllers/homecontroller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Infrastructure/Builder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/AccountModels/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/AccountModels/Credit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/AccountModels/Deposit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/ITransactionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/MyBankOnlyTransaction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/OtherBankTransaction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/SendRecieveStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/Transaction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/TransactionRepoManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/TransactionModels/TransactionRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/Models/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/java/com/Vassah/MyBank/MyBankApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/main/resources/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/MyBank/src/test/java/com/Vassah/MyBank/MyBankApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBank/UML_project_last_version.drawio (1).png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/MyBank" />
+  </component>
+  <component name="ProjectId" id="27i9V9oPCOxsMG6hUoUdNwLGGbB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5a215351-b725-4ef4-bb0e-65d8a9ed200c" name="Changes" comment="" />
+      <created>1649792070240</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649792070240</updated>
+    </task>
+    <servers />
+  </component>
+</project>
