@@ -1,13 +1,14 @@
 package com.Vassah.MyBank.Model;
 
-/*import javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;*/
+import javax.persistence.Id;
 
-import com.Vassah.MyBank.Entity.UserEntity;
-
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
     private Account[] accounts;
@@ -24,17 +25,7 @@ public class User {
 
     private TransactionType status;
     
-    protected User()
-    {
-
-    }
-
-    public static User toModel(UserEntity entity){
-        User model = new User();
-        model.setId(entity.getId());
-        model.setName(entity.getName());
-        return model;
-    }
+    protected User(){}
 
     public Long getId(){return id;}
     public void setId(Long id){this.id=id;}
@@ -42,8 +33,9 @@ public class User {
     public String getName(){return firstName;}
     public void setName(String firstName){this.firstName=firstName;}
 
-    public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
 
+
+    public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
     public String fullName() { return firstName + middleName + lastName; }
 
 }

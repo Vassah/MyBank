@@ -1,10 +1,11 @@
 package com.Vassah.MyBank.Controllers;
 
-import com.Vassah.MyBank.Entity.UserEntity;
 import com.Vassah.MyBank.Repositories.UserRepository;
+import com.Vassah.MyBank.Model.User;
 
 import org.h2.engine.UserBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,35 +23,26 @@ public class RegistrationController {
 
     @Autowired
     private UserRepository userRepo;
-
+    
     @PostMapping
-    public ResponseEntity registrate(@RequestBody UserEntity user){
+    public ResponseEntity registrate(@RequestBody User user){
         try {
-            UserBuilder.registration(user);
+            User userReg = UserBuilder.registrate(user);
             return ResponseEntity.ok("Пользователь сохранён");
         } catch(Exception e){
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
 
     }
+}
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity getOneUser(@RequestParam Long id){
         try{
             return ResponseEntity.ok(UserBuilder.getOne(id));
         }catch(Exception e){
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
-    }
+    }*/
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteUser(@PathVariable Long id){
-        try{
-            return ResponseEntity.ok(UserBuilder.delete(id));
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
-    }
-
-}
 
