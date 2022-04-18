@@ -23,26 +23,12 @@ public class RegistrationController {
 
     @Autowired
     private UserRepository userRepo;
-    
-    @PostMapping
-    public ResponseEntity registrate(@RequestBody User user){
-        try {
-            User userReg = UserBuilder.registrate(user);
-            return ResponseEntity.ok("Пользователь сохранён");
-        } catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
 
-    }
+    
+    public RegistrationController(){}
+    
+
 }
 
-    /*@PostMapping
-    public ResponseEntity getOneUser(@RequestParam Long id){
-        try{
-            return ResponseEntity.ok(UserBuilder.getOne(id));
-        }catch(Exception e){
-            return ResponseEntity.badRequest().body("Произошла ошибка");
-        }
-    }*/
 
 
