@@ -23,7 +23,7 @@ public class User {
 
     private String phoneNumber;
 
-    private TransactionType status;
+    private UserStatus status;
     
     protected User(){}
 

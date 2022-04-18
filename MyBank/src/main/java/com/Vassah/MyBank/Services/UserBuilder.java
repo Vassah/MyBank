@@ -3,6 +3,7 @@ package com.Vassah.MyBank.Services;
 import com.Vassah.MyBank.Exceptions.UserAlreadyExistException;
 import com.Vassah.MyBank.Repositories.UserRepository;
 import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.Model.UserStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
@@ -11,15 +12,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public class UserBuilder {
+    private String firstName;
 
-    @Autowired
-    private UserRepository userRepo;
+    private String lastName;
+
+    private String middleName;
+
+    private String passwordHash;
+
+    private String phoneNumber;
+
+    private UserStatus status;
 
 
-    public User registration(User user) throws UserAlreadyExistException{
-        if (userRepo.findById(user.getId())!=null){
-            throw new UserAlreadyExistException("Пользователь с таким именем существует");
-        }
-        return userRepo.save(user);
+    public UserBuilder(){
+    }
+
+    public UserBuilder(String firstName, String lastName){
+        
     }
 }
