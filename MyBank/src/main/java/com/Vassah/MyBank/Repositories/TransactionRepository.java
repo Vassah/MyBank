@@ -12,6 +12,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     @Query("Select tr from TransactionRepository where tr.recieverAccountNumber = accountNumber or tr.senderAccountNumber = accountNumber")
     Collection<Transaction> ByAccountNumber(long accountNumber);
 
-    @Query("Select tr from TrnsactionRepository where tr.proccesTime between begin and end")
+    @Query("Select tr from TransactionRepository where tr.proccesTime between begin and end")
     Collection<Transaction> ByPeriod(OffsetDateTime begin, OffsetDateTime end);
 }
