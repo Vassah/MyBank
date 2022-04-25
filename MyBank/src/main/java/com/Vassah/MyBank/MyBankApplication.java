@@ -1,6 +1,6 @@
 package com.Vassah.MyBank;
 
-import java.io.BufferedReader;
+/*import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,16 +11,31 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+*/
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+//import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+
+@Configuration
+@EnableAutoConfiguration
 @SpringBootApplication
 public class MyBankApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(MyBankApplication.class);
+	//private static final Logger log = LoggerFactory.getLogger(MyBankApplication.class);
 	public static void main(String[] args) {
-		SpringApplication.run(MyBankApplication.class, args);
+/*
+		// registrating config file
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		ctx.register(MyBankConfig.class);
+		ctx.refresh();
+
+		ctx.close();
+
 
 
 		//Server starting
@@ -49,9 +64,13 @@ public class MyBankApplication {
 				bufwriter.flush();
 			}
 
-		}catch(IOException e){
+		}catch(IOException e){	
 			throw new RuntimeException(e);
 		}
+		*/
+
+
+		SpringApplication.run(MyBankApplication.class, args);
 	}
 
 

@@ -18,7 +18,7 @@ public abstract class Account {
     
     private Transaction[] transactions;
 
-    private Card card;
+    private Long cardNumber;
 
     private AccountStatus status;
 
@@ -84,20 +84,6 @@ public abstract class Account {
     }
 
     /**
-     * @return Card return the card
-     */
-    public Card getCard() {
-        return card;
-    }
-
-    /**
-     * @param card the card to set
-     */
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    /**
      * @return AccountStatus return the status
      */
     public AccountStatus getStatus() {
@@ -109,6 +95,21 @@ public abstract class Account {
      */
     public void setStatus(AccountStatus status) {
         this.status = status;
+    }
+
+
+    /**
+     * @return Long return the cardNumber
+     */
+    public Long getCardNumber() {
+        return cardNumber;
+    }
+
+    /**
+     * @param cardNumber the cardNumber to set
+     */
+    public void setCardNumber(Long cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
 }

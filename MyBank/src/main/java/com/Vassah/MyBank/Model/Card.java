@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.OffsetDateTime;
-import com.Vassah.MyBank.Model.Account;
 
 @Entity
 public class Card {
@@ -21,7 +20,7 @@ public class Card {
 
     private String passwordHash;
 
-    private Account account;
+    private Long accountNumber;
 
     protected Card(){};
     
@@ -96,18 +95,20 @@ public class Card {
         this.passwordHash = passwordHash;
     }
 
+
+
     /**
-     * @return Account return the account
+     * @return Long return the accountNumber
      */
-    public Account getAccount() {
-        return account;
+    public Long getAccountNumber() {
+        return accountNumber;
     }
 
     /**
-     * @param account the account to set
+     * @param accountNumber the accountNumber to set
      */
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountNumber(Long accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
 }
