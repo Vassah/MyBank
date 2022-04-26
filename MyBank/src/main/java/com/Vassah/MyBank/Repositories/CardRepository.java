@@ -8,6 +8,6 @@ public interface CardRepository extends CrudRepository<Card, Long>{
 
     Card findByAccount(Account account);
 
-    @Query("select c from CardRepository where c.account.number = number")
-    Card findByAccountNumber(long number);
+    //@Query("select c from CardRepository where c.account.number = number")
+    //Card findByAccountNumber(long number);
 }

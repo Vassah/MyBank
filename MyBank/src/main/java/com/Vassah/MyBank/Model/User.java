@@ -11,8 +11,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
-    private Account[] accounts;
-
     private String firstName;
 
     private String lastName;
@@ -37,21 +35,6 @@ public class User {
 
     public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
     public String fullName() { return firstName + middleName + lastName; }
-
-
-    /**
-     * @return Account[] return the accounts
-     */
-    public Account[] getAccounts() {
-        return accounts;
-    }
-
-    /**
-     * @param accounts the accounts to set
-     */
-    public void setAccounts(Account[] accounts) {
-        this.accounts = accounts;
-    }
 
     /**
      * @return String return the firstName

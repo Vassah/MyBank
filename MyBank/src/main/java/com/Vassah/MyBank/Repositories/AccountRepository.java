@@ -11,12 +11,12 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
     
     Collection<Account> findByUser(User user);
 
-    @Query("select acc from AccountRepository where acc.user.id = userId")
-    Collection<Account> findByUserId(long userId);
+    //@Query("select acc from AccountRepository where acc.user.id = userId")
+    //Collection<Account> findByUserId(long userId);
 
     Account findByCard(Card card);
 
-    @Query("select acc from AccountRepository where acc.card.number = cardNumber")
-    Account findByCardNumber(long number);
+    //@Query("select acc from AccountRepository where acc.card.number = cardNumber")
+    //Account findByCardNumber(long number);
 
 }

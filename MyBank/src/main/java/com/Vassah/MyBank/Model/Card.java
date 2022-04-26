@@ -1,12 +1,19 @@
 package com.Vassah.MyBank.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import java.time.OffsetDateTime;
 
 @Entity
+@Table(name = "cards")
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +27,9 @@ public class Card {
 
     private String passwordHash;
 
-    private Long accountNumber;
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "accountId", nullable = false)
+    private Account account;
 
     protected Card(){};
     
@@ -98,17 +107,17 @@ public class Card {
 
 
     /**
-     * @return Long return the accountNumber
+     * @return Account return the account
      */
-    public Long getAccountNumber() {
-        return accountNumber;
+    public Account getAccount() {
+        return account;
     }
 
     /**
-     * @param accountNumber the accountNumber to set
+     * @param account the account to set
      */
-    public void setAccountNumber(Long accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }
