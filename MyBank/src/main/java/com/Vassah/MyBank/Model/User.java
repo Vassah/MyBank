@@ -1,9 +1,13 @@
 package com.Vassah.MyBank.Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -22,6 +26,9 @@ public class User {
     private String phoneNumber;
 
     private UserStatus status;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Account> accounts = new HashSet<Account>();
     
     protected User(){}
 
@@ -117,6 +124,27 @@ public class User {
     private void UpdateUserStatus()
     {
 
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * @return Set<Account> return the accounts
+     */
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    /**
+     * @param accounts the accounts to set
+     */
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
     }
 
 }

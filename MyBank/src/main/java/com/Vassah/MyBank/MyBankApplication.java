@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+*/
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-*/
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,33 +26,22 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class MyBankApplication {
 
-	//private static final Logger log = LoggerFactory.getLogger(MyBankApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(MyBankApplication.class);
 	public static void main(String[] args) {
 /*
-		// registrating config file
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(MyBankConfig.class);
-		ctx.refresh();
-
-		ctx.close();
-
-
-
-		//Server starting
+		Server starting
 		try(ServerSocket server = new ServerSocket(8000)){
 			System.out.println("Server started");
 
 			while(true)
-			try( Socket socket = server.accept();
-				BufferedWriter bufwriter = new BufferedWriter(
-					new OutputStreamWriter(
-						socket.getOutputStream()));
-				
-				BufferedReader bufreader = new BufferedReader(
-					new InputStreamReader(
-						socket.getInputStream()))
+			try
+			( 
+				Socket socket = server.accept();
+				BufferedWriter bufwriter = new BufferedWriter( new OutputStreamWriter(socket.getOutputStream()));
 
-			){
+				BufferedReader bufreader = new BufferedReader(new InputStreamReader(socket.getInputStream()))
+			)
+			{
 				String request = bufreader.readLine();
 				System.out.println("Request: "+request);
 
