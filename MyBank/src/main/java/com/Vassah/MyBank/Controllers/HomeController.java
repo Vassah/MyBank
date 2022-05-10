@@ -13,4 +13,9 @@ public class HomeController {
     {
         return "Index";
     }
+    @GetMapping("/first_page")
+    public String FirstPage(){
+        return "first_page";
+    }
+
 }
