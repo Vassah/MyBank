@@ -124,9 +124,9 @@ public class User {
     }
 
     /**
-     * @return TransactionType return the status
+     * @return UserSatus return the status
      */
-    public TransactionType getStatus() {
+    public UserStatus getStatus() {
         UpdateUserStatus();
         return status;
     }
