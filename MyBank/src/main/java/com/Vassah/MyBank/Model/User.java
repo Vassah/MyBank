@@ -1,17 +1,19 @@
 package com.Vassah.MyBank.Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
-
-    private Account[] accounts;
 
     private String firstName;
 
@@ -24,6 +26,9 @@ public class User {
     private String phoneNumber;
 
     private UserStatus status;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Account> accounts = new HashSet<Account>();
     
     protected User(){}
 
@@ -37,21 +42,6 @@ public class User {
 
     public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
     public String fullName() { return firstName + middleName + lastName; }
-
-
-    /**
-     * @return Account[] return the accounts
-     */
-    public Account[] getAccounts() {
-        return accounts;
-    }
-
-    /**
-     * @param accounts the accounts to set
-     */
-    public void setAccounts(Account[] accounts) {
-        this.accounts = accounts;
-    }
 
     /**
      * @return String return the firstName
@@ -124,7 +114,11 @@ public class User {
     }
 
     /**
-     * @return UserSatus return the status
+<<<<<<< HEAD
+     * @return UserStatus return the status
+=======
+     * @return UserStatus return the status
+>>>>>>> server_settings
      */
     public UserStatus getStatus() {
         UpdateUserStatus();
@@ -134,6 +128,27 @@ public class User {
     private void UpdateUserStatus()
     {
 
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(UserStatus status) {
+        this.status = status;
+    }
+
+    /**
+     * @return Set<Account> return the accounts
+     */
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    /**
+     * @param accounts the accounts to set
+     */
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
     }
 
 }

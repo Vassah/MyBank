@@ -1,23 +1,35 @@
 package com.Vassah.MyBank.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import java.util.Currency;
 
 @Entity
+@Table(name = "accounts")
 public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long number;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
     private Currency balance;
     
     private Transaction[] transactions;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "cardId")
     private Card card;
 
     private AccountStatus status;
@@ -84,20 +96,6 @@ public abstract class Account {
     }
 
     /**
-     * @return Card return the card
-     */
-    public Card getCard() {
-        return card;
-    }
-
-    /**
-     * @param card the card to set
-     */
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    /**
      * @return AccountStatus return the status
      */
     public AccountStatus getStatus() {
@@ -109,6 +107,21 @@ public abstract class Account {
      */
     public void setStatus(AccountStatus status) {
         this.status = status;
+    }
+
+
+    /**
+     * @return Long return the card
+     */
+    public Card getCard() {
+        return card;
+    }
+
+    /**
+     * @param card the card to set
+     */
+    public void setCar(Card card) {
+        this.card = card;
     }
 
 }
