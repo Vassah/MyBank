@@ -15,6 +15,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 //import org.springframework.context.annotation.Bean;
@@ -59,8 +60,8 @@ public class MyBankApplication {
 		*/
 
 
-		SpringApplication.run(MyBankApplication.class, args);
+		SpringApplication application = new SpringApplication(MyBankApplication.class);
+		application.addListeners(new ApplicationPidFileWriter("./app.pid"));
+		application.run();
 	}
-
-
 }
