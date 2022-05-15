@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+    
     @GetMapping("/")
     public String Index()
     {
         return "index";
     }
+
     @GetMapping("/first_page")
     public String FirstPage(){
         return "first_page";
