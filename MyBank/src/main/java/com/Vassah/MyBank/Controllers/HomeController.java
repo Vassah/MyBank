@@ -11,7 +11,7 @@ public class HomeController {
     @GetMapping("/")
     public String Index()
     {
-        return "Index";
+        return "index";
     }
     @GetMapping("/first_page")
     public String FirstPage(){
