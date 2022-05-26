@@ -11,7 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
@@ -24,15 +26,19 @@ public abstract class Account {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    private Currency balance;
+    private Currency currency;
+
+    private BigDecimal balance;
     
-    private Transaction[] transactions;
+    private List<Transaction> transactions;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "cardId")
     private Card card;
 
     private AccountStatus status;
+
+    private BigDecimal balanceLimit = BigDecimal.valueOf(0);
 
     protected Account(){};
 
@@ -61,38 +67,24 @@ public abstract class Account {
     }
 
     /**
-     * @param user the user to set
+     * @return BigDecimal return the balance
      */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * @return Currency return the balance
-     */
-    public Currency getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
     /**
-     * @param balance the balance to set
+     * @return List<Transaction> return the transactions
      */
-    public void setBalance(Currency balance) {
-        this.balance = balance;
-    }
-
-    /**
-     * @return Transaction[] return the transactions
-     */
-    public Transaction[] getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
     /**
      * @param transactions the transactions to set
      */
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
     }
 
     /**
@@ -120,8 +112,23 @@ public abstract class Account {
     /**
      * @param card the card to set
      */
-    public void setCar(Card card) {
+    public void setCard(Card card) {
         this.card = card;
+    }
+
+    public BigDecimal getBalanceLimit()
+    {
+        return balanceLimit;
+    }
+
+    public void setBalanceLimit(BigDecimal limit)
+    {
+        balanceLimit = limit;
+    }
+
+    public Currency getCurrency()
+    {
+        return currency;
     }
 
 }

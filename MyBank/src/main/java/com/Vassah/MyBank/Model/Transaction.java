@@ -1,4 +1,5 @@
 package com.Vassah.MyBank.Model;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
@@ -13,7 +14,9 @@ public class Transaction{
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    private Currency amount;
+    private Currency currency;
+
+    private BigDecimal amount;
 
     private long senderAccountNumber;
     
@@ -25,6 +28,14 @@ public class Transaction{
 
     protected Transaction() {}
 
+    public Transaction(long _senderAccNum, long _recieverAccNum, BigDecimal _amount, Currency _curr)
+    {
+        senderAccountNumber = _senderAccNum;
+        recieverAccountNumber = _recieverAccNum;
+        amount = _amount; 
+        currency = _curr;
+
+    }
 
     /**
      * @return long return the id
@@ -41,31 +52,18 @@ public class Transaction{
     }
 
     /**
-     * @return Currency return the amount
+     * @return BigDecimal return the amount
      */
-    public Currency getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(Currency amount) {
-        this.amount = amount;
-    }
 
     /**
      * @return long return the senderAccountNumber
      */
     public long getSenderAccountNumber() {
         return senderAccountNumber;
-    }
-
-    /**
-     * @param senderAccountNumber the senderAccountNumber to set
-     */
-    public void setSenderAccountNumber(long senderAccountNumber) {
-        this.senderAccountNumber = senderAccountNumber;
     }
 
     /**
@@ -76,13 +74,6 @@ public class Transaction{
     }
 
     /**
-     * @param recieverAccountNumber the recieverAccountNumber to set
-     */
-    public void setRecieverAccountNumber(long recieverAccountNumber) {
-        this.recieverAccountNumber = recieverAccountNumber;
-    }
-
-    /**
      * @return OffsetDateTime return the proccesTime
      */
     public OffsetDateTime getProccesTime() {
@@ -90,11 +81,13 @@ public class Transaction{
     }
 
     /**
-     * @param proccesTime the proccesTime to set
+     * @param OffsetDateTime the process to set
      */
-    public void setProccesTime(OffsetDateTime proccesTime) {
-        this.proccesTime = proccesTime;
-    }
+
+     public void setProccesTime(OffsetDateTime time)
+     {
+         proccesTime = time;
+     }
 
     /**
      * @return TransactionType return the type
@@ -103,11 +96,15 @@ public class Transaction{
         return type;
     }
 
-    /**
-     * @param type the type to set
-     */
-    public void setType(TransactionType type) {
-        this.type = type;
+    public void setTransactionType(TransactionType _type)
+    {
+        type = _type;
     }
+
+    public Currency getCurrency()
+    {
+        return currency;
+    }
+
 
 }
