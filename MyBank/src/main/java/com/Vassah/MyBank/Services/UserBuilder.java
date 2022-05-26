@@ -1,8 +1,6 @@
 package com.Vassah.MyBank.Services;
 
-//import com.Vassah.MyBank.Exceptions.UserAlreadyExistException;
-//import com.Vassah.MyBank.Repositories.UserRepository;
-//import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.Model.User;
 import com.Vassah.MyBank.Model.UserStatus;
 
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +26,14 @@ public class UserBuilder {
     public UserBuilder(){
     }
 
-    public UserBuilder(String firstName, String lastName){
-        
+    public UserBuilder(String _fName, String _lName)
+    {
+        firstName = _fName;
+        lastName = _lName;
+    }
+
+    public User toUser()
+    {
+        return new User(firstName, lastName, middleName, passwordHash, phoneNumber, status);
     }
 }

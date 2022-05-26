@@ -15,9 +15,5 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/first_page")
-    public String FirstPage(){
-        return "first_page";
-    }
 
 }
