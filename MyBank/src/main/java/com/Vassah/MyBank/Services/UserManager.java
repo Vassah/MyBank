@@ -1,8 +1,6 @@
 package com.Vassah.MyBank.Services;
 
-import com.Vassah.MyBank.Model.Account;
 import com.Vassah.MyBank.Model.User;
-import com.Vassah.MyBank.Repositories.AccountRepository;
 import com.Vassah.MyBank.Repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +12,28 @@ import lombok.AllArgsConstructor;
 @Service
 @Component
 @AllArgsConstructor
-public class AccountManager {
+public class UserManager {
     @Autowired
     private final UserRepository userRepo;
-    @Autowired
-    private final AccountRepository accountRepo;
 
-    public void AddAccountToUser(User user, Account acc)
+    public void SendPhoneCode(String phoneNumber)
     {
-        user.AddAccount(acc);
+
+        if (userRepo.findByPhoneNumber(phoneNumber)!=null)
+        {
+            
+        }
+
+
+    }
+
+    public boolean CheckPhoneCode(String code)
+    {
+        return true;
+    }
+
+    public void RegisterUser(User user)
+    {
         userRepo.save(user);
-        acc.setUser(user);
-        accountRepo.save(acc);
     }
 }
