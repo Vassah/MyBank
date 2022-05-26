@@ -42,15 +42,19 @@ public class User {
     
     protected User(){}
 
+    public User(String _fName, String _lName, String _mName, String _pHash, String _pNumber, UserStatus _uStatus){
+        firstName = _fName;
+        lastName = _lName;
+        middleName = _mName;
+        passwordHash = _pHash;
+        phoneNumber = _pNumber;
+        status = _uStatus;
+    }
+
     public Long getId(){return id;}
-    public void setId(Long id){this.id=id;}
-
-    public String getName(){return firstName;}
-    public void setName(String firstName){this.firstName=firstName;}
-
-
 
     public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
+    
     public String fullName() { return firstName + middleName + lastName; }
 
     public void AddAccount (Account account)

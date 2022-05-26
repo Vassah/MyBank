@@ -21,10 +21,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
     	<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-devtools</artifactId>
@@ -33,7 +29,7 @@
 		<dependency>
 		<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>5.3.19</version>
+			<version>5.3.20</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,7 +70,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-      	<dependency>
+	  	<dependency>
         	 <groupId>org.postgresql</groupId>
         	 <artifactId>postgresql</artifactId>
          	<version>9.4-1206-jdbc42</version>
@@ -82,8 +78,8 @@
 	
    		<dependency>
      		<groupId>com.h2database</groupId>
-   	  		<artifactId>h2</artifactId>
-     		<version>2.1.212</version>
+      		<artifactId>h2</artifactId>
+	   		<version>2.1.212</version>
    		</dependency>
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
