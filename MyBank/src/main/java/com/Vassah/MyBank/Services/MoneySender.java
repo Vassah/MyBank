@@ -10,8 +10,11 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Currency;
 
+import lombok.NoArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+@NoArgsConstructor
 public class MoneySender implements Sendable{
 
     @Autowired
@@ -22,16 +25,11 @@ public class MoneySender implements Sendable{
 
     private static MoneySender instance;
 
-    private MoneySender(TransactionRepository _trRepo, AccountRepository _accRepo)
-    {
-         
-    }
-
     public static MoneySender GetInstance()
     {
         if (instance == null)
         {
-
+            return new MoneySender();
         }
         return MoneySender.instance;
     
