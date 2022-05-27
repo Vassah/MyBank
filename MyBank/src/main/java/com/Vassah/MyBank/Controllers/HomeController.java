@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    
+
+    @GetMapping("/layout")
+    public String Layout()
+    {return "layout";}
+
     @GetMapping("/")
     public String Index()
     {

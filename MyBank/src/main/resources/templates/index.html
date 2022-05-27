@@ -1,48 +1,317 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BankPage</title>
-    <link rel="stylesheet" href="../style.css">
+<html>
+<head th:insert="fragments :: html_head">
+
 </head>
-<style>
-    .raz{border: 1px solid red;}
-.sticky{position: sticky;
-        top:0;
-        min-height:2em;}
-.faces{display:inline-block;}
-.faces img{display:block;}
-.div1{display:inline;}
-</style>
-<body style="background-color:#EBB582">
 
-<div class="sticky">
-    <div class = "raz" style="background-color:#EB8A3E">
+<body>
+  <div th:insert="fragments :: block"></div>
 
-        <div class="div1"><p align="center"><b><FONT size="5">MyBank</FONT></b></p>
-            <p align="right"><a href="registration">Регистрация нового пользователя</a></p></div>
+    <div class="swiper-container" id="top">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slide-inner" style="background-image:url(assets/images/slide-01.jpg)">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="header-text">
+                    <h2>Рады приветсвовать Вас<br>на нашем сайте!</h2>
+                    <div class="div-dec"></div>
+                    <div class="buttons">
+                      <div class="green-button">
+                        <a href="#">Зарегистрироваться</a>
+                      </div>
+                      <div class="orange-button">
+                        <a href="#">Войти в аккаунт</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-inner" style="background-image:url(assets/images/slide-02.jpg)">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="header-text">
+                    <h2>Вы можете ознакомиться с информацией о нашем приложении, перейти в личный кабинет или связаться с нами.</h2>
+                    <div class="buttons">
+                      <div class="green-button">
+                        <a href="#">Зарегистрироваться</a>
+                      </div>
+                      <div class="orange-button">
+                        <a href="#">Войти в аккаунт</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="swiper-slide">
+          <div class="slide-inner" style="background-image:url(assets/images/slide-03.jpg)">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="header-text">
+                    <h2>Best One in Town<br>&amp; Crypto <em>Services</em></h2>
+                    <div class="div-dec"></div>
+                    <p>When you browse through different tags on TemplateMo website, you can see a variety of CSS templates which are responsive website designs for different individual needs. Please tell your friends about our website. Thank you.</p>
+                    <div class="buttons">
+                      <div class="green-button">
+                        <a href="#">Discover More</a>
+                      </div>
+                      <div class="orange-button">
+                        <a href="#">Contact Us</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+      <div class="swiper-button-next swiper-button-white"></div>
+      <div class="swiper-button-prev swiper-button-white"></div>
     </div>
+
+
+  <!-- ***** Main Banner Area End ***** -->
+
+  <section class="services" id="services">
+    <h1><center>Наши преимущества</center></h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="service-item">
+            <i class="fas fa-archive"></i>
+            <h4>Подключение многих полезных функций</h4>
+            <p></p>
+         </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="service-item">
+            <i class="fas fa-cloud"></i>
+            <h4>Красивый дизайн</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="service-item">
+            <i class="fas fa-charging-station"></i>
+            <h4>Работа с преподавателями лучшего вуза страны</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="service-item">
+            <i class="fas fa-suitcase"></i>
+            <h4>Высокая оценка по Java</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--<section class="simple-cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <h4>Business <em>Solutions</em> and <strong>Crypto</strong> Investments</h4>
+        </div>
+        <div class="col-lg-7">
+          <div class="buttons">
+            <div class="green-button">
+              <a href="#">Discover More</a>
+            </div>
+            <div class="orange-button">
+              <a href="#">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>-->
+
+
+  <!--<section class="calculator">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading">
+            <h6>Your Freedom</h6>
+            <h4>Get a Financial Plan</h4>
+          </div>
+          <form id="calculate" action="" method="get">
+            <div class="row">
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="name">Your Name</label>
+                  <input type="name" name="name" id="name" placeholder="" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <label for="email">Your Email</label>
+                  <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="" required="">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="subject">Subject</label>
+                  <input type="subject" name="subject" id="subject" placeholder="" autocomplete="on" >
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="chooseOption" class="form-label">Your Reason</label>
+                  <select name="Category" class="form-select" aria-label="Default select example" id="chooseOption" onchange="this.form.click()">
+                      <option selected>Choose an Option</option>
+                      <option type="checkbox" name="option1" value="Online Banking">Online Banking</option>
+                      <option value="Financial Control">Financial Control</option>
+                      <option value="Yearly Profit">Yearly Profit</option>
+                      <option value="Crypto Investment">Crypto Investment</option>
+                  </select>
+              </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="orange-button">Submit Now</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>-->
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Наша команда</h6>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <div class="owl-testimonials owl-carousel" style="position: relative; z-index: 5;">
+            <div class="item">
+              <i class="fa fa-quote-left"></i>
+              <p>Студент МФТИ, специализирующийся на фронте</p>
+              <span>Ермаков Василий</span>
+              <div class="right-image">
+                <img src="assets/images/Vasya.jpg" alt="">
+              </div>
+            </div>
+            <div class="item">
+              <i class="fa fa-quote-left"></i>
+              <p>Студент МФТИ, выполняющий бэк-разработку</p>
+              <span>Акантьев Александр</span>
+              <div class="right-image">
+                <img src="assets/images/Sasha.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+        <div class="col-lg-2 col-sm-4 col-6">
+          <div class="item">
+            <img src="assets/images/client-01.png" alt="">
+          </div>
+        </div>
+      </div>
+  </section>
 </div>
 
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<h1><b>Наши преимущества:</b></h1>
-<FONT size =5><ul>
-    <li>Разрабатывается студентами лучшего ВУЗа страны</li>
-    <li>Современные технологии</li>
-    <li>Неконсольный дизайн</li>
-    <li>Хорошая оценка по ТП</li>
-</ul></FONT>
-<h2>Наша команда:</h2>
-<div id="images">
-    <div class="faces">
-        <img src="images/Sasha.jpg" width="253" height="299">
-        Александр Акантьев
-    </div>
-    <div class="faces">
-        <img src="images/Vasya.jpg" width="302" height="299">
-        Василий Ермаков
-    </div>
-</div>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/swiper.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        var interleaveOffset = 0.5;
 
-</body>
+      var swiperOptions = {
+        loop: true,
+        speed: 1000,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        mousewheelControl: true,
+        keyboardControl: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        on: {
+          progress: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              var slideProgress = swiper.slides[i].progress;
+              var innerOffset = swiper.width * interleaveOffset;
+              var innerTranslate = slideProgress * innerOffset;
+              swiper.slides[i].querySelector(".slide-inner").style.transform =
+                "translate3d(" + innerTranslate + "px, 0, 0)";
+            }      
+          },
+          touchStart: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = "";
+            }
+          },
+          setTransition: function(speed) {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = speed + "ms";
+              swiper.slides[i].querySelector(".slide-inner").style.transition =
+                speed + "ms";
+            }
+          }
+        }
+      };
+
+      var swiper = new Swiper(".swiper-container", swiperOptions);
+    </script>
+  </body>
 </html>
