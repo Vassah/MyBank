@@ -8,14 +8,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.List;
 
 @Entity
 @Table(name = "accounts")
-public abstract class Account {
+@NoArgsConstructor
+@Data 
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long number;
@@ -24,9 +32,12 @@ public abstract class Account {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-    private Currency balance;
+    private Currency currency;
+
+    private BigDecimal balance;
     
-    private Transaction[] transactions;
+    @OneToMany(mappedBy = "id")
+    private List<Transaction> transactions;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "cardId")
@@ -34,94 +45,10 @@ public abstract class Account {
 
     private AccountStatus status;
 
-    protected Account(){};
+    private BigDecimal balanceLimit = BigDecimal.valueOf(0);
 
-    
-
-
-    /**
-     * @return long return the number
-     */
-    public long getNumber() {
-        return number;
+    public void addTransaction(Transaction transaction)
+    {
+        transactions.add(transaction);
     }
-
-    /**
-     * @param number the number to set
-     */
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    /**
-     * @return User return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * @return Currency return the balance
-     */
-    public Currency getBalance() {
-        return balance;
-    }
-
-    /**
-     * @param balance the balance to set
-     */
-    public void setBalance(Currency balance) {
-        this.balance = balance;
-    }
-
-    /**
-     * @return Transaction[] return the transactions
-     */
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
-
-    /**
-     * @param transactions the transactions to set
-     */
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
-    /**
-     * @return AccountStatus return the status
-     */
-    public AccountStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(AccountStatus status) {
-        this.status = status;
-    }
-
-
-    /**
-     * @return Long return the card
-     */
-    public Card getCard() {
-        return card;
-    }
-
-    /**
-     * @param card the card to set
-     */
-    public void setCar(Card card) {
-        this.card = card;
-    }
-
 }

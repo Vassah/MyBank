@@ -1,19 +1,30 @@
 package com.Vassah.MyBank.Model;
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Currency;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaction{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
-    private Currency amount;
+    private Currency currency;
+
+    private BigDecimal amount;
 
     private long senderAccountNumber;
     
@@ -21,93 +32,13 @@ public class Transaction{
     
     private OffsetDateTime proccesTime;
 
-    private TransactionType type;
+    private TransactionType transactionType;
 
-    protected Transaction() {}
-
-
-    /**
-     * @return long return the id
-     */
-    public long getId() {
-        return id;
+    public Transaction(long _senderAccNum, long _recieverAccNum, BigDecimal _amount, Currency _currency)
+    {
+        senderAccountNumber = _senderAccNum;
+        recieverAccountNumber = _recieverAccNum;
+        amount = _amount;
+        currency = _currency;
     }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return Currency return the amount
-     */
-    public Currency getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(Currency amount) {
-        this.amount = amount;
-    }
-
-    /**
-     * @return long return the senderAccountNumber
-     */
-    public long getSenderAccountNumber() {
-        return senderAccountNumber;
-    }
-
-    /**
-     * @param senderAccountNumber the senderAccountNumber to set
-     */
-    public void setSenderAccountNumber(long senderAccountNumber) {
-        this.senderAccountNumber = senderAccountNumber;
-    }
-
-    /**
-     * @return long return the recieverAccountNumber
-     */
-    public long getRecieverAccountNumber() {
-        return recieverAccountNumber;
-    }
-
-    /**
-     * @param recieverAccountNumber the recieverAccountNumber to set
-     */
-    public void setRecieverAccountNumber(long recieverAccountNumber) {
-        this.recieverAccountNumber = recieverAccountNumber;
-    }
-
-    /**
-     * @return OffsetDateTime return the proccesTime
-     */
-    public OffsetDateTime getProccesTime() {
-        return proccesTime;
-    }
-
-    /**
-     * @param proccesTime the proccesTime to set
-     */
-    public void setProccesTime(OffsetDateTime proccesTime) {
-        this.proccesTime = proccesTime;
-    }
-
-    /**
-     * @return TransactionType return the type
-     */
-    public TransactionType getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(TransactionType type) {
-        this.type = type;
-    }
-
 }

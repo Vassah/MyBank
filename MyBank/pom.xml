@@ -91,6 +91,7 @@
     		<version>42.3.3</version>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
@@ -103,6 +104,12 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf-spring5</artifactId>
 			<version>3.0.11.RELEASE</version>
+=======
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+    		<version>1.18.24</version>
+    		<scope>provided</scope>
+>>>>>>> cae67d1bf43848463c55a349d9e05f6ea28966d2
 		</dependency>
 
  </dependencies>
