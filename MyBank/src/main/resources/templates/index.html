@@ -1,48 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>BankPage</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
-<style>
-    .raz{border: 1px solid red;}
-.sticky{position: sticky;
-        top:0;
-        min-height:2em;}
-.faces{display:inline-block;}
-.faces img{display:block;}
-.div1{display:inline;}
-</style>
-<body style="background-color:#EBB582">
+<html layout:decorate="~{layout}">
+  <head>
+    
+  </head>
+<body>
+  <div layout:fragment="content">
+    <div th:insert="/index/slides :: slides"> </div>
+  
+    <div th:insert="/index/advantages :: advantages"> </div>
+  
+    <div th:insert="/index/team :: team"></div>
 
-<div class="sticky">
-    <div class = "raz" style="background-color:#EB8A3E">
+    <!-- <div th:insert="/index/calculator :: calculator> </div>"-->
+  <!-- Scripts -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <div class="div1"><p align="center"><b><FONT size="5">MyBank</FONT></b></p>
-            <p align="right"><a href="registration">Регистрация нового пользователя</a></p></div>
-    </div>
-</div>
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/swiper.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>
+        var interleaveOffset = 0.5;
 
+      var swiperOptions = {
+        loop: true,
+        speed: 1000,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        mousewheelControl: true,
+        keyboardControl: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
+        on: {
+          progress: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              var slideProgress = swiper.slides[i].progress;
+              var innerOffset = swiper.width * interleaveOffset;
+              var innerTranslate = slideProgress * innerOffset;
+              swiper.slides[i].querySelector(".slide-inner").style.transform =
+                "translate3d(" + innerTranslate + "px, 0, 0)";
+            }      
+          },
+          touchStart: function() {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = "";
+            }
+          },
+          setTransition: function(speed) {
+            var swiper = this;
+            for (var i = 0; i < swiper.slides.length; i++) {
+              swiper.slides[i].style.transition = speed + "ms";
+              swiper.slides[i].querySelector(".slide-inner").style.transition =
+                speed + "ms";
+            }
+          }
+        }
+      };
 
-<h1><b>Наши преимущества:</b></h1>
-<FONT size =5><ul>
-    <li>Разрабатывается студентами лучшего ВУЗа страны</li>
-    <li>Современные технологии</li>
-    <li>Неконсольный дизайн</li>
-    <li>Хорошая оценка по ТП</li>
-</ul></FONT>
-<h2>Наша команда:</h2>
-<div id="images">
-    <div class="faces">
-        <img src="images/Sasha.jpg" width="253" height="299">
-        Александр Акантьев
-    </div>
-    <div class="faces">
-        <img src="images/Vasya.jpg" width="302" height="299">
-        Василий Ермаков
-    </div>
-</div>
-
-</body>
+      var swiper = new Swiper(".swiper-container", swiperOptions);
+    </script>
+  </div>
+  </body>
 </html>
