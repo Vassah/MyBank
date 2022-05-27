@@ -22,8 +22,6 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
-import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 
 
 @Configuration
@@ -67,8 +65,5 @@ public class MyBankApplication {
 		SpringApplication application = new SpringApplication(MyBankApplication.class);
 		application.addListeners(new ApplicationPidFileWriter("./app.pid"));
 		application.run();
-		SpringTemplateEngine engine = new SpringTemplateEngine();
-		engine.addDialect(new LayoutDialect());
-		engine.addDialect(new LayoutDialect(new GroupingStrategy()));
 	}
 }

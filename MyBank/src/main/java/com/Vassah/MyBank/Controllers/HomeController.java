@@ -13,6 +13,10 @@ public class HomeController {
     public String Layout()
     {return "layout";}
 
+    @GetMapping("/profile")
+    public String Lk()
+    {return "personal_account";}
+
     @GetMapping("/")
     public String Index()
     {
