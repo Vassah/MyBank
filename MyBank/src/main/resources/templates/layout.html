@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout>
-    <head th:fragment="html_head">    
-=======
-<html xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="html_head" >    
->>>>>>> 6f3d39ed6c110359f27b888d691150bac367342e
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:frament="html_head">    
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -26,14 +21,8 @@
 
     <body>
         <div th:insert="header :: block"></div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 6f3d39ed6c110359f27b888d691150bac367342e
-        <div class="container">
-            <div layout:fragment="content"></div>
-            <div th:insert="footer :: footer"></div>
-        </div>
+        <div layout:fragment="content"></div>
+        <div th:insert="footer :: footer"></div>
 
     </body>
 </html>
