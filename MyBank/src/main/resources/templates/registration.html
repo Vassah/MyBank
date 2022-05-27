@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+    <head></head>
+    <body>
+        <div layout:fragment="content">
+            <section><h1><FONT size="5">Регистрация пользователя:</FONT></h1>
+                <form method="POST" action="/">
+                    <div>
+                        <label for="name">Name</label>
+                        <input name="name" type="text" id="name"/><br>
+            
+                        <label for="surname">Surname</label>
+                        <input name="surname" type="text" id="surname"/><br>
+            
+                        <input type="submit" value="Add person"/>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </body>
+</html>

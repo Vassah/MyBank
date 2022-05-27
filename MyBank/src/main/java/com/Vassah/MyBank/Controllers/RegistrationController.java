@@ -28,13 +28,11 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String RegisterUser()
     {
-        return "registration_page";
+        return "registration";
     }
 
     @PostMapping(value="/registration")
     public String RegisterUser(@RequestBody UserBuilder Name) {
-        //TODO: process POST request
-        
         return "registration/phone";
     }
 
