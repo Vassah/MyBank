@@ -1,7 +1,7 @@
 package com.Vassah.MyBank.Controllers;
 
+import com.Vassah.MyBank.Model.User;
 import com.Vassah.MyBank.Repositories.UserRepository;
-import com.Vassah.MyBank.Services.UserBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
@@ -32,7 +32,7 @@ public class RegistrationController {
     }
 
     @PostMapping(value="/registration")
-    public String RegisterUser(@RequestBody UserBuilder Name) {
+    public String RegisterUser(@RequestBody User Name) {
         //TODO: process POST request
         
         return "registration/phone";

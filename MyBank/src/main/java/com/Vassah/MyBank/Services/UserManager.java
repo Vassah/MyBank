@@ -36,4 +36,9 @@ public class UserManager {
     {
         userRepo.save(user);
     }
+
+    public void UpdateUserProfile(User user)
+    {
+        userRepo.save(user);
+    }
 }
