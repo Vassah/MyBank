@@ -2,20 +2,63 @@
 <html layout:decorate="~{layout}">
     <head></head>
     <body>
-        <div layout:fragment="content">
-            <section><h1><FONT size="5">Регистрация пользователя:</FONT></h1>
-                <form method="POST" action="/">
-                    <div>
-                        <label for="name">Name</label>
-                        <input name="name" type="text" id="name"/><br>
-            
-                        <label for="surname">Surname</label>
-                        <input name="surname" type="text" id="surname"/><br>
-            
-                        <input type="submit" value="Add person"/>
+            <div layout:fragment="content">
+              <div class="page-heading">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="header-text">
+                        <h2>Регистрация пользователя</h2>
+                        <div class="div-dec"></div>
+                      </div>
                     </div>
-                </form>
+                  </div>
+                </div>
+            </div>
+
+            <section class="calculator">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <div class="section-heading">
+                      <h4>Регистрация нового пользователя</h4>
+                    </div>
+                    <form id="calculate" action="" method="get">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="name">Ваше имя:</label>
+                            <input type="name" name="name" id="name" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="surname">Ваша фамилия:</label>
+                            <input type="text" name="surname" id="surname" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="password">Ваша фамилия:</label>
+                            <input type="password" name="password" id="password" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="orange-button">Зарегестрироваться</button>
+                          </fieldset>
+                          <fieldset>
+                            <a href="#" onclick="history.back();return false;" class="history.back">Вернуться на главную страницу</a>
+                          </fieldset>
+                        </div>
+                      </div>
+                    </form>
+                  </div> 
+                </div>
+              </div>
             </section>
+
+          <br>
         </div>
     </body>
 </html>

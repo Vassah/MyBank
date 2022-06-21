@@ -31,6 +31,7 @@ public class RegistrationController {
         return "registration";
     }
 
+
     @PostMapping(value="/registration")
     public String RegisterUser(@RequestBody UserBuilder Name) {
         return "registration/phone";
@@ -41,6 +42,8 @@ public class RegistrationController {
     {
         return "registration/phone";
     }
+
+
     
     
 
