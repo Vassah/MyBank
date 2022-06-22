@@ -14,7 +14,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.ApplicationPidFileWriter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
@@ -22,6 +24,12 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class MyBankApplication {
 
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder()
+    {
+        return new BCryptPasswordEncoder();
+    }
+	
 	private static final Logger log = LoggerFactory.getLogger(MyBankApplication.class);
 	public static void main(String[] args) {
 /*
@@ -53,7 +61,6 @@ public class MyBankApplication {
 			throw new RuntimeException(e);
 		}
 		*/
-
 
 		SpringApplication application = new SpringApplication(MyBankApplication.class);
 		application.addListeners(new ApplicationPidFileWriter("./app.pid"));

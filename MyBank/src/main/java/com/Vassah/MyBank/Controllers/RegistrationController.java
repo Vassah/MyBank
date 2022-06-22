@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,7 +32,6 @@ public class RegistrationController {
     @PostMapping(value="/registration")
     public String RegisterUser(@RequestBody User Name) {
         //TODO: process POST request
-        
         return "registration/phone";
     }
 
@@ -44,7 +41,11 @@ public class RegistrationController {
         return "registration/phone";
     }
     
-    
+    @GetMapping("login")
+    public String Login()
+    {
+        return "login";
+    }
 
 }
 
