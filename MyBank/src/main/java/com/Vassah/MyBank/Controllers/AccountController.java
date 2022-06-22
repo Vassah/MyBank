@@ -2,7 +2,6 @@ package com.Vassah.MyBank.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
 public class AccountController {
 
@@ -11,5 +10,13 @@ public class AccountController {
     {
         return "admin";
     }
+
+    @GetMapping("/user/login")
+    public String LogInAccount()
+    {
+        return "login";
+    }
+
+
     
 }

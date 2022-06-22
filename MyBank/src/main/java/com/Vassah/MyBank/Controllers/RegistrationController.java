@@ -1,8 +1,9 @@
 package com.Vassah.MyBank.Controllers;
 
-import com.Vassah.MyBank.Model.User;
+//import com.Vassah.MyBank.Model.User;
 //import com.Vassah.MyBank.Services.UserManager;
 
+import org.springframework.security.core.userdetails.User.UserBuilder;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,12 @@ public class RegistrationController {
     @GetMapping("/registration")
     public String RegisterUser()
     {
-        return "registration_page";
+        return "registration";
     }
 
+
     @PostMapping(value="/registration")
-    public String RegisterUser(@RequestBody User Name) {
+    public String RegisterUser(@RequestBody UserBuilder Name) {
         return "registration/phone";
     }
 
@@ -32,6 +34,8 @@ public class RegistrationController {
     {
         return "registration/phone";
     }
+
+
     
     @GetMapping("login")
     public String Login()
