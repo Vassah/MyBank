@@ -55,9 +55,12 @@ public class RegistrationController {
     {
         return "registration/phone";
     }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 7abcafd8521746d452a12c0fb4648c5c558c09e8
     
     @GetMapping("login")
     public String Login()
