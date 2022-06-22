@@ -1,10 +1,10 @@
 package com.Vassah.MyBank.Repositories;
 
-import java.util.Collection;
-import java.time.OffsetDateTime;
+//import java.util.Collection;
+//import java.time.OffsetDateTime;
 import com.Vassah.MyBank.Model.Transaction;
 
-import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
