@@ -54,7 +54,7 @@ public class MoneySender implements Sendable{
                 { 
                     var transaction = CreateTransaction(senderAccountNumber, recieverAccountNumber, amount, currency);
                     transaction.setTransactionType(TransactionType.MyBankOnly);
-
+                    
                     sender.addTransaction(transaction);
                     accountRepository.save(sender);
                     reciever.addTransaction(transaction);
