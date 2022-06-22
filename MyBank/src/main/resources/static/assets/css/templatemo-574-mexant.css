@@ -846,6 +846,14 @@ section.simple-cta {
   width: 100%;
   padding: 80px 0px;
 }
+section.simple-cta2 {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  padding: 80px 0px;
+}
 
 section.simple-cta .left-image {
   margin-right: 45px;
