@@ -5,18 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AccountController {
 
-    @GetMapping("admin")
+    @GetMapping("/admin")
     public String Admin()
     {
         return "admin";
     }
-
-    @GetMapping("/user/login")
-    public String LogInAccount()
-    {
-        return "login";
-    }
-
-
     
 }

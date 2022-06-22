@@ -34,8 +34,6 @@ public class RegistrationController {
     {
         return "registration/phone";
     }
-
-
     
     @GetMapping("login")
     public String Login()
