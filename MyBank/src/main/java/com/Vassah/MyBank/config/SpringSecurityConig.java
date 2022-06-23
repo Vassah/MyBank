@@ -1,7 +1,5 @@
 package com.Vassah.MyBank.config;
 
-import com.Vassah.MyBank.Services.UserDetailsServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +12,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.Vassah.MyBank.Services.UserManager;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
@@ -22,7 +22,7 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
     private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	private UserManager userDetailsService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;

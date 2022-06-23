@@ -7,9 +7,12 @@ import com.Vassah.MyBank.Model.User;
 import com.Vassah.MyBank.Repositories.RolesRepository;
 import com.Vassah.MyBank.Repositories.UserRepository;
 
-import groovy.transform.AutoImplement;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,23 @@ import lombok.AllArgsConstructor;
 @Service
 @Component
 @AllArgsConstructor
-public class UserManager {
+public class UserManager implements UserDetailsService{
+
+    private static Logger logger = LoggerFactory.getLogger(UserManager.class);
+
+    @Override
+    public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
+        var user = userRepo.findByPhoneNumber(username);
+        if (user == null)
+        {
+            String msg = "User" + username +"not found";
+            logger.info(msg);
+            throw new UsernameNotFoundException(msg);
+        }
+
+       return user;
+    }
+    
     
     private final UserRepository userRepo;
     

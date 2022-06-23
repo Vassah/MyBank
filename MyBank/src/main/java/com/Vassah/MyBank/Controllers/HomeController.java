@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/profile")
-    public String Lk()
-    {return "personal_account";}
-
     @GetMapping(value={"/", "/index"})
     public String Index()
     {
