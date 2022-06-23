@@ -23,24 +23,42 @@
                     <div class="section-heading">
                       <h4>Регистрация нового пользователя</h4>
                     </div>
-                    <form id="calculate" th:action="@{/registration}" th:method="POST" th:object="${user}">
+                    <form th:action="@{/registration}" method="POST" th:object="${userForm}">
                       <div class="row">
                         <div class="col-lg-6">
                           <fieldset>
-                            <label for="name"><font color="black">Ваше имя:</font></label>
-                            <input type="name" th:field="*{name}" id="name" placeholder="" autocomplete="on" required>
+                            <label for="firstName"><font color="black">Ваше имя:</font></label>
+                            <input type="text" th:field="*{firstName}" placeholder="Иван" required>
                           </fieldset>
                         </div>
                         <div class="col-lg-6">
                           <fieldset>
-                            <label for="surname"><font color="black">Ваша фамилия:</font></label>
-                            <input type="text" th:field="*{surname}" id="surname" placeholder="" autocomplete="on" required>
+                            <label for="lastName"><font color="black">Ваша фамилия:</font></label>
+                            <input type="text" th:field="*{lastName}" placeholder="Иванов" required>
                           </fieldset>
                         </div>
                         <div class="col-lg-6">
                           <fieldset>
-                            <label for="password"><font color="black">Ваш пароль:</font></label>
-                            <input type="password" th:field="*{password}" id="password" placeholder="" autocomplete="on" required>
+                            <label for="phoneNumber"><font color="black">Ваш номер телефона</font></label>
+                            <input type="tel" th:field="*{phoneNumber}" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="email"><font color="black">Ваш Email:</font></label>
+                            <input type="email" th:field="*{email}" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="passwordHash"><font color="black">Ваш пароль:</font></label>
+                            <input type="password" th:field="*{passwordHash}" placeholder="" autocomplete="on" required>
+                          </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                          <fieldset>
+                            <label for="passwordConfirmHash"><font color="black">Ваш пароль ещё раз:</font></label>
+                            <input type="password" th:field="*{passwordConfirmHash}" placeholder="" autocomplete="on" required>
                           </fieldset>
                         </div>
                         <div class="col-lg-12">

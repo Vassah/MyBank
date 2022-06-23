@@ -1,9 +1,16 @@
 package com.Vassah.MyBank.Services;
 
+import java.util.Collections;
+
+import com.Vassah.MyBank.Model.Role;
 import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.Repositories.RolesRepository;
 import com.Vassah.MyBank.Repositories.UserRepository;
 
+import groovy.transform.AutoImplement;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -13,32 +20,77 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class UserManager {
-    @Autowired
+    
     private final UserRepository userRepo;
+    
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public void SendPhoneCode(String phoneNumber)
+    private RolesRepository rolesRepo;
+
+    @Autowired
+    public UserManager(RolesRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder)
     {
-
-        if (userRepo.findByPhoneNumber(phoneNumber)!=null)
-        {
-            
-        }
-
+        rolesRepo = _rrepo;
+        userRepo = _urepo;
+        passwordEncoder = _encoder;
+        seedRoles();
 
     }
 
-    public boolean CheckPhoneCode(String code)
+    private void seedRoles()
+    {
+        if (!rolesRepo.findById(1L).isPresent())
+        {    
+            rolesRepo.save(new Role(1L, "User_role"));
+        }
+
+        if (!rolesRepo.findById(2L).isPresent())
+        {    
+            rolesRepo.save(new Role(2L, "Admin_role"));
+            User admin = userRepo.findById(1L).isPresent() ? userRepo.findById(1L).get() : new User();
+            admin.setPhoneNumber("+70000000000");
+            admin.setPasswordHash(passwordEncoder.encode("6815255"));
+            admin.setRoles((Collections.singleton(new Role(2L, "Admin_role"))));
+            userRepo.save(admin);
+        }
+
+    }
+
+    public void sendPhoneCode(String phoneNumber)
+    {
+
+    }
+
+    public boolean checkPhoneCode(String code)
     {
         return true;
     }
 
-    public void RegisterUser(User user)
+    public void updateUserProfile(User user)
     {
         userRepo.save(user);
     }
 
-    public void UpdateUserProfile(User user)
-    {
+    public boolean registerUser(User user) {
+        User userFromDB = userRepo.findByPhoneNumber(user.getUsername());
+        if (userFromDB != null) {
+            return false;
+        }
+        userFromDB = userRepo.findByEmail(user.getEmail());
+        if (userFromDB != null) {
+            return false;
+        }
+        user.setRoles(Collections.singleton(new Role(1L, "User_role")));
+        user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
+        return true;
+    }
+
+    public boolean deleteUser(Long userId) {
+        if (userRepo.findById(userId).isPresent()) {
+            userRepo.deleteById(userId);
+            return true;
+        }
+        return false;
     }
 }

@@ -40,7 +40,7 @@ public class Account {
     private List<Transaction> transactions;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "cardId")
+    @JoinColumn(name = "card_id")
     private Card card;
 
     private AccountStatus status;

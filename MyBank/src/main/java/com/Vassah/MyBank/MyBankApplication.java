@@ -65,5 +65,6 @@ public class MyBankApplication {
 		SpringApplication application = new SpringApplication(MyBankApplication.class);
 		application.addListeners(new ApplicationPidFileWriter("./app.pid"));
 		application.run();
+		log.info("MyBank started");
 	}
 }

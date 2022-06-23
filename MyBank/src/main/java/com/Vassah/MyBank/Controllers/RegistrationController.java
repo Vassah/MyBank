@@ -1,19 +1,16 @@
 package com.Vassah.MyBank.Controllers;
 
 import com.Vassah.MyBank.Model.User;
-//import com.Vassah.MyBank.Services.UserManager;
 import com.Vassah.MyBank.Services.UserManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User.UserBuilder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -22,50 +19,42 @@ public class RegistrationController {
     @Autowired
     private UserManager userManager;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @GetMapping("/registration/new")
-    public String RegisterUser(Model model)
+    @GetMapping("/registration")
+    public String Registration(Model model)
     {
-        model.addAttribute("user", new User());
+        model.addAttribute("userForm", new User());
         return "registration";
     }
     
     @PostMapping("/registration")
-    public String RegisterNewUser(@RequestParam("name") String name, @RequestParam("surname") String surname,
-                                    @RequestParam("password") String password)
+    public String RegisterUser(@ModelAttribute("userForm") @Validated User userForm, BindingResult bindingResult, Model model)
     {
-        User user = new User();
+        if (bindingResult.hasErrors())
+        {
+            return "/registration";
+        }
+        if (!userForm.getPassword().equals(userForm.getPasswordConfirmHash())){
+            model.addAttribute("passwordError", "Пароли не совпадают");
+            return "/registration";
+        }
+        if (!userManager.registerUser(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "/registration";
+        }
 
-        user.setFirstName(name);
-        user.setLastName(surname);
-        user.setPasswordHash(passwordEncoder.encode(password));
-        userManager.RegisterUser(user);
-
-        return "index";
+        return "redirect:/ConfirmEmail";
     }
 
+    @GetMapping("/ConfirmEmail")
+    public String ConfirmEmail()
+    {
+        return "ConfirmEmail";
+    }
 
-
- 
-
-    @GetMapping("registration/phone")
+    @GetMapping("/registration/phone")
     public String PhoneAdmit()
     {
         return "registration/phone";
-    }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 7abcafd8521746d452a12c0fb4648c5c558c09e8
-    
-    @GetMapping("login")
-    public String Login()
-    {
-        return "login";
     }
 
 }

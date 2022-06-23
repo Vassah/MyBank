@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -28,12 +29,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(uniqueConstraints = {
-    @UniqueConstraint(name="phoneNumber", columnNames = "phoneNumber")
-})
+    @UniqueConstraint(name="phoneNumber", columnNames = "phoneNumber"),
+    @UniqueConstraint(name="email", columnNames = "email")
+}, name = "users")
 public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
+
+    private String phoneNumber;
+
+    private String email;
 
     private String firstName;
 
@@ -43,15 +49,16 @@ public class User implements UserDetails{
 
     private String passwordHash;
 
-    private String phoneNumber;
+    @Transient
+    private String passwordConfirmHash;
+
+    private boolean enabled;
 
     @OneToMany(mappedBy = "user")
-    private Set<Account> accounts = new HashSet<Account>();
+    private Set<Account> accounts;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
-
-    public Long getId(){return id;}
 
     public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
     
