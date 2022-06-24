@@ -21,7 +21,7 @@ import java.util.Currency;
 @Table(name = "transactions")
 public class Transaction{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
 
     private Currency currency;

@@ -1229,6 +1229,12 @@ page heading
   text-align: center;
 }
 
+.page-heading h1 {
+  font-size: 62px;
+  color: #fff;
+  font-weight: 700;
+}
+
 .page-heading h2 {
   font-size: 56px;
   color: #fff;

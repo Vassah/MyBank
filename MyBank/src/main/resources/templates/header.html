@@ -7,14 +7,13 @@
                     <div class="col-12">
                         <nav class="main-nav">
                             
-                            <a href="index.html" class="logo">
-                                <img src="assets/images/Logo.png" alt="">
+                            <a href="/" class="logo">
+                                <img src="../assets/images/Logo.png" alt="">
                             </a>
                             <!-- Menu -->
                             <ul class="nav">
                                 <li class="scroll-to-section"><a href="">Связаться с нами</a></li>
                                 <li class="scroll-to-section"><a href="/">Домашняя страница</a></li>
-                                <li class="scroll-to-section"><a href="">Сервис</a></li>
                                 <li class="has-sub">
                                     <a href="javascript:void(0)">Навигация</a>
                                     <ul class="sub-menu">
@@ -25,10 +24,16 @@
                                     </ul>
                                 </li>
                                 <div sec:authorize="!isAuthenticated()">
-                                <li><a href="/user/login">Войти</a></li> 
+                                <li><a href="/login">Войти</a></li> 
                                 </div>
                                 <div sec:authorize="isAuthenticated()">
-                                    <li><a href="/profile">Кабинет</a></li> 
+                                    <li class="has-sub">
+                                        <a href="/user/profile">Аккаунт</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="/user/profile">Профиль</a></li>
+                                            <li><a  href="/logout">Выйти</a></li>
+                                        </ul>
+                                    </li>
                                 </div>
                                 
                             </ul>        

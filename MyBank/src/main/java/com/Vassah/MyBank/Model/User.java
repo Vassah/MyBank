@@ -33,7 +33,7 @@ import lombok.NoArgsConstructor;
 }, name = "users")
 public class User implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
 
     private String phoneNumber;
@@ -53,15 +53,15 @@ public class User implements UserDetails{
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Account> accounts;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
+    public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
     
-    public String fullName() { return firstName + middleName + lastName; }
+    public String fullName() { return middleName == null ?  String.join(" ", firstName, lastName) : String.join(" ", firstName, middleName, lastName); }
 
     public void AddAccount (Account account)
     {

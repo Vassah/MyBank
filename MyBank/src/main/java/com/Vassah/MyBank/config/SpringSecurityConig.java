@@ -32,10 +32,10 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/admin/**").hasAnyRole("Admin_role")
                 .antMatchers("/", "/assets/**", "/vendor/**").permitAll()
-                .antMatchers("/registration", "/ConfirmEmail", "/ConfirmEmail/**").not().fullyAuthenticated()
+                .antMatchers("/registration", "/ConfirmEmail", "/ConfirmEmail/**", "/login").not().fullyAuthenticated()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
-                .defaultSuccessUrl("/user").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/user/profile").failureUrl("/login?error=true")
                 .and().logout().logoutUrl("/logout").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and().rememberMe().tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(1 * 24 * 60 * 60); //24 hours

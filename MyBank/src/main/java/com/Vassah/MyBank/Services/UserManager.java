@@ -22,33 +22,41 @@ import lombok.AllArgsConstructor;
 @Service
 @Component
 @AllArgsConstructor
-public class UserManager implements UserDetailsService{
+public class UserManager implements UserDetailsService {
 
     private static Logger logger = LoggerFactory.getLogger(UserManager.class);
 
     @Override
-    public UserDetails loadUserByUsername(String username)  throws UsernameNotFoundException{
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepo.findByPhoneNumber(username);
-        if (user == null)
-        {
-            String msg = "User" + username +"not found";
+        if (user == null) {
+            String msg = "User" + username + "not found";
             logger.info(msg);
             throw new UsernameNotFoundException(msg);
         }
 
-       return user;
+        return user;
     }
-    
-    
+
+    public User getUser(String username) throws UsernameNotFoundException{
+        var user = userRepo.findByPhoneNumber(username);
+        if (user == null) {
+            String msg = "User" + username + "not found";
+            logger.info(msg);
+            throw new UsernameNotFoundException(msg);
+        }
+
+        return user;
+    }
+
     private final UserRepository userRepo;
-    
+
     private final BCryptPasswordEncoder passwordEncoder;
 
     private RolesRepository rolesRepo;
 
     @Autowired
-    public UserManager(RolesRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder)
-    {
+    public UserManager(RolesRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder) {
         rolesRepo = _rrepo;
         userRepo = _urepo;
         passwordEncoder = _encoder;
@@ -56,15 +64,12 @@ public class UserManager implements UserDetailsService{
 
     }
 
-    private void seedRoles()
-    {
-        if (!rolesRepo.findById(1L).isPresent())
-        {    
+    private void seedRoles() {
+        if (!rolesRepo.findById(1L).isPresent()) {
             rolesRepo.save(new Role(1L, "User_role"));
         }
 
-        if (!rolesRepo.findById(2L).isPresent())
-        {    
+        if (!rolesRepo.findById(2L).isPresent()) {
             rolesRepo.save(new Role(2L, "Admin_role"));
             User admin = userRepo.findById(1L).isPresent() ? userRepo.findById(1L).get() : new User();
             admin.setPhoneNumber("+70000000000");
@@ -75,18 +80,15 @@ public class UserManager implements UserDetailsService{
 
     }
 
-    public void sendPhoneCode(String phoneNumber)
-    {
+    public void sendPhoneCode(String phoneNumber) {
 
     }
 
-    public boolean checkPhoneCode(String code)
-    {
+    public boolean checkPhoneCode(String code) {
         return true;
     }
 
-    public void updateUserProfile(User user)
-    {
+    public void updateUserProfile(User user) {
         userRepo.save(user);
     }
 

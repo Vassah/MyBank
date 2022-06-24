@@ -28,7 +28,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long number;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
