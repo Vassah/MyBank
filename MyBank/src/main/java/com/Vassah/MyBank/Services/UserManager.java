@@ -38,7 +38,7 @@ public class UserManager implements UserDetailsService {
         return user;
     }
 
-    public User getUser(String username) throws UsernameNotFoundException{
+    public User getUser(String username) throws UsernameNotFoundException {
         var user = userRepo.findByPhoneNumber(username);
         if (user == null) {
             String msg = "User" + username + "not found";
@@ -77,6 +77,7 @@ public class UserManager implements UserDetailsService {
             admin.setRoles((Collections.singleton(new Role(2L, "Admin_role"))));
             userRepo.save(admin);
         }
+       
 
     }
 

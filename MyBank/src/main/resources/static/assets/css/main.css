@@ -1497,10 +1497,22 @@ section.service-details ul.nacc li .left-image {
   position: absolute;
   margin-right: 50px;
   top: 50%;
-  transform: translateY(-50%);
+  transform:translate(15%, -50%);
 }
 
 section.service-details ul.nacc li .left-image img {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+section.service-details ul.nacc li .bank-image {
+  position: absolute;
+  margin-right: 50px;
+  top: 50%;
+  transform:translate(0%, -50%);
+}
+
+section.service-details ul.nacc li .bank-image img {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
 }
