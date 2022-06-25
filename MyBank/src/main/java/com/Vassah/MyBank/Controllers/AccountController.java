@@ -8,6 +8,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Vassah.MyBank.Model.Account;
 import com.Vassah.MyBank.Model.AccountStatus;
@@ -53,7 +56,40 @@ public class AccountController {
         model.addAttribute("debit", debit);
         model.addAttribute("credit", credit);
         model.addAttribute("deposit", deposit);
-        return "profile";
+        return "user/profile";
     }
+
+    @GetMapping("/user/newaccount")
+    public String newAccount(Model model)
+    {
+        model.addAttribute("account", new Account());
+        return "user/newaccount";
+    }
+
+    @PostMapping("/user/newaccount")
+    public String newAccount(@ModelAttribute(value = "account" ) Account acc, Model model)
+    {
+        
+        return "user/profile";
+    }
+
+    @GetMapping("/user/byphone")
+    public String byPhone(Model model)
+    {
+        return "user/byphone";
+    }
+
+    @GetMapping("/user/bycard")
+    public String byCard(Model model)
+    {
+        return "user/bycard";
+    }
+
+    @GetMapping("/user/self")
+    public String Self(Model model)
+    {
+        return "user/self";
+    }
+
 
 }
