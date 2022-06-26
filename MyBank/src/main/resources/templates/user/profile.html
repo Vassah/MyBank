@@ -58,16 +58,22 @@
                                       </p>
                                     </div>
                                     <div th:if="${!debit.isEmpty()}">
-                                      <ul>
-                                        <th:block th:each="acc : ${debit}">
-                                          <li>
-                                            <p>
-                                              Дебетовый счёт номер : <span th:text="acc.number"></span>
-                                              <br /> Баланс : <span th:text="acc.balance"> </span>
-                                            </p>
-                                          </li>
-                                        </th:block>
-                                      </ul>
+                                      <div class="col-lg-12">
+                                        <table class="table">
+                                          <thead calss="thead-dark">
+                                            <th scope="col"> Номер счёта </th>
+                                            <th scope="col"> Баланс</th>
+                                            <th scope="col"> Номер карты</th>
+                                          </thead>
+                                          <tbody>
+                                            <tr th:each="acc : ${debit}">
+                                              <td th:text="${acc.getNumber()}"></td>
+                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}"></td>                                            
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -87,16 +93,22 @@
                                       </p>
                                     </div>
                                     <div th:if="${!deposit.isEmpty()}">
-                                      <ul>
-                                        <th:block th:each="acc : ${deposit}">
-                                          <li>
-                                            <p>
-                                              Вклад номер : <span th:text="acc.number"></span>
-                                              <br /> Баланс : <span th:text="acc.balance"> </span>
-                                            </p>
-                                          </li>
-                                        </th:block>
-                                      </ul>
+                                       <div class="col-lg-12">
+                                        <table class="table">
+                                          <thead calss="thead-dark">
+                                            <th scope="col"> Номер вклада </th>
+                                            <th scope="col"> Баланс</th>
+                                            <th scope="col"> Процент</th>
+                                          </thead>
+                                          <tbody>
+                                            <tr th:each="acc : ${deposit}">
+                                              <td th:text="${acc.getNumber()}"></td>
+                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text=" ${acc.multiplicator - 100}">%</td>                                            
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -116,16 +128,23 @@
                                       </p>
                                     </div>
                                     <div th:if="${!credit.isEmpty()}">
-                                      <ul>
-                                        <th:block th:each="acc : ${debit}">
-                                          <li>
-                                            <p>
-                                              Кредитный счёт номер : <span th:text="acc.number"></span>
-                                              <br /> Баланс : <span th:text="acc.balance"> </span>
-                                            </p>
-                                          </li>
-                                        </th:block>
-                                      </ul>
+                                      <div class="col-lg-12">
+                                        <table class="table">
+                                          <thead calss="thead-dark">
+                                            <th scope="col"> Номер кредитного счёта</th>
+                                            <th scope="col"> Баланс</th>
+                                            <th scope="col"> Процент</th>
+                                            <th scope="col"> Номер карты</th>
+                                          </thead>
+                                          <tbody>
+                                            <tr th:each="acc : ${credit}">
+                                              <td th:text="${acc.getNumber()}"></td>
+                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text=" ${acc.multiplicator - 100}">%</td>       
+                                              <td th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}"></td>                                     
+                                            </tr>
+                                          </tbody>
+                                        </table>
                                     </div>
                                   </div>
                                 </div>

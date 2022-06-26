@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Role implements GrantedAuthority{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;

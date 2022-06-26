@@ -65,15 +65,18 @@ public class UserManager implements UserDetailsService {
     }
 
     private void seedRoles() {
-        if (!rolesRepo.findById(1L).isPresent()) {
+        if (!rolesRepo.findByName("User_role").isPresent()) {
             rolesRepo.save(new Role(1L, "User_role"));
         }
 
-        if (!rolesRepo.findById(2L).isPresent()) {
+        if (!rolesRepo.findByName("Admin_role").isPresent()) {
             rolesRepo.save(new Role(2L, "Admin_role"));
             User admin = userRepo.findById(1L).isPresent() ? userRepo.findById(1L).get() : new User();
             admin.setPhoneNumber("+70000000000");
             admin.setPasswordHash(passwordEncoder.encode("6815255"));
+            admin.setFirstName("Alexandr");
+            admin.setLastName("Vasiliy");
+            admin.setEmail("ad.akantev@phystech.edu");
             admin.setRoles((Collections.singleton(new Role(2L, "Admin_role"))));
             userRepo.save(admin);
         }

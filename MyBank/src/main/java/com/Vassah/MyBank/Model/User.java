@@ -1,8 +1,10 @@
 package com.Vassah.MyBank.Model;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -53,15 +56,16 @@ public class User implements UserDetails{
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Account> accounts;
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER )//, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Account> accounts;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
     
-    public String fullName() { return middleName == null ?  String.join(" ", firstName, lastName) : String.join(" ", firstName, middleName, lastName); }
+    public String fullName() { return String.join(" ", firstName, lastName); }
 
     public void AddAccount (Account account)
     {

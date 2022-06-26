@@ -8,15 +8,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Vassah.MyBank.Model.Account;
-import com.Vassah.MyBank.Model.AccountStatus;
 import com.Vassah.MyBank.Model.Transaction;
 import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.Services.AccountManager;
 import com.Vassah.MyBank.Services.UserManager;
 
 @Controller
@@ -24,6 +21,9 @@ public class AccountController {
 
     @Autowired
     private UserManager userManager;
+
+    @Autowired
+    private AccountManager accManager;
 
     @GetMapping("/admin")
     public String Admin() {
@@ -34,44 +34,50 @@ public class AccountController {
     public String profile(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
         var accounts = user.getAccounts();
-        List<Account> deposit = new ArrayList<Account>();
-        List<Account> credit = new ArrayList<Account>();
-        List<Account> debit = new ArrayList<Account>();
+        List<Account> deposits = new ArrayList<Account>();
+        List<Account> credits = new ArrayList<Account>();
+        List<Account> debits = new ArrayList<Account>();
         List<Transaction> transactions = new ArrayList<Transaction>();
         if (accounts != null) {
             for (Account acc : accounts) {
-                transactions.addAll(acc.getTransactions());
+                transactions.addAll(acc.getTransactions() == null? new ArrayList<Transaction>() : acc.getTransactions() );
                 switch (acc.getStatus()) {
                     case Debit:
-                        debit.add(acc);
+                        debits.add(acc);
                         break;
                     case Credit:
-                        credit.add(acc);
+                        credits.add(acc);
                         break;
                     case Deposit:
-                        deposit.add(acc);
+                        deposits.add(acc);
                         break;
                 }
             }
         }
         transactions.sort((Transaction tr1, Transaction tr2) -> tr1.getProccesTime().compareTo(tr2.getProccesTime()));
         model.addAttribute("transactions", transactions);
-        model.addAttribute("debit", debit);
-        model.addAttribute("credit", credit);
-        model.addAttribute("deposit", deposit);
+        model.addAttribute("debit", debits);
+        model.addAttribute("credit", credits);
+        model.addAttribute("deposit", deposits);
         return "user/profile";
     }
 
     @GetMapping("/user/newaccount")
-    public String newAccount(@RequestParam(required = false, name = "card") String card, Model model) {
+    public String newAccount(@RequestParam(required = false, name = "card") String card, @AuthenticationPrincipal User user, Model model) {
         if (card == null) {
             return "user/newaccount";
         }
        switch(card)
        {
-        case "debit": return "user/success";
-        case "deposit": return "user/success";
-        case "credit": return "user/success";
+        case "debit": 
+            accManager.debit(user, "1234");
+            return "user/success";
+        case "deposit": 
+            accManager.deposit(user, "1234");
+            return "user/success";
+        case "credit": 
+            accManager.credit(user, "1234");
+            return "user/success";
         default: return "user/newaccount";
        }
     }
