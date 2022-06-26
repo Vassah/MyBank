@@ -1,5 +1,6 @@
  package com.Vassah.MyBank.Services;
 
+import com.Vassah.MyBank.Model.AccToAccTransfer;
 import com.Vassah.MyBank.Model.Account;
 import com.Vassah.MyBank.Model.Transaction;
 import com.Vassah.MyBank.Model.TransactionType;
@@ -10,11 +11,16 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.Currency;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@NoArgsConstructor
+@Service
+@Component
+@AllArgsConstructor
 public class MoneySender implements Sendable{
 
     @Autowired
@@ -23,18 +29,6 @@ public class MoneySender implements Sendable{
     @Autowired
     AccountRepository accountRepository;
 
-    private static MoneySender instance;
-
-    public static MoneySender GetInstance()
-    {
-        if (instance == null)
-        {
-            return new MoneySender();
-        }
-        return MoneySender.instance;
-    
-    }
-
     private Transaction CreateTransaction(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount, Currency currency)
     {
         var transaction = new Transaction(senderAccountNumber, recieverAccountNumber, amount, currency);
@@ -42,7 +36,7 @@ public class MoneySender implements Sendable{
         return transaction;
     }
 
-    public Transaction SendMoney(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount, Currency currency) 
+    public boolean SendMoney(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount, Currency currency) 
     {
         Account sender = accountRepository.findById(senderAccountNumber).get();
         if (accountRepository.findById(recieverAccountNumber).isPresent())
@@ -60,12 +54,43 @@ public class MoneySender implements Sendable{
                     reciever.addTransaction(transaction);
                     accountRepository.save(reciever);
                     transactionRepo.save(transaction);
-                    return transaction;
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
-        return null;
+        return false;
+    }
+
+    public boolean SendMoney(AccToAccTransfer transfer) 
+    {
+        Account sender = accountRepository.findById(transfer.getSenderNumber()).get();
+        if (accountRepository.findById(transfer.getRecieverNumber()).isPresent())
+        {
+            Account reciever = accountRepository.findById(transfer.getRecieverNumber()).get();
+            if (sender.getCurrency() == reciever.getCurrency())
+            {
+                var currency = sender.getCurrency();
+                if (sender.getBalance().add( transfer.getAmount().negate()).compareTo(sender.getBalanceLimit()) == 1)
+                { 
+                    var transaction = CreateTransaction(transfer.getSenderNumber(), transfer.getRecieverNumber(), transfer.getAmount(), currency);
+                    transaction.setTransactionType(TransactionType.MyBankOnly);
+                    transaction = transactionRepo.save(transaction);
+
+                    sender.addTransaction(transaction);
+                    sender.setBalance(sender.getBalance().subtract(transfer.getAmount()));
+                    accountRepository.save(sender);
+                    
+                    reciever.addTransaction(transaction);
+                    reciever.setBalance(reciever.getBalance().add(transfer.getAmount()));
+                    accountRepository.save(reciever);
+                    
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 
     

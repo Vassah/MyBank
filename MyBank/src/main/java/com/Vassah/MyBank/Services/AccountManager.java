@@ -8,10 +8,12 @@ import com.Vassah.MyBank.Repositories.AccountRepository;
 import com.Vassah.MyBank.Repositories.CardRepository;
 import com.Vassah.MyBank.Repositories.UserRepository;
 
+
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Currency;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -104,10 +106,9 @@ public class AccountManager {
         userRepo.save(user);
     }
 
-    public void AddAccountToUser(User user, Account acc)
+    public List<Account> findAccountsByUser(User user)
     {
-        acc.setUser(user);
-        accountRepo.save(acc);
+        return accountRepo.findByUser(user);
     }
 
 }
