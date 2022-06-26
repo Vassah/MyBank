@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class AccToAccTransfer {
+public class AccToCardTransfer {
 
     private Long senderAccNumber;
 
-    private Long recieverAccNumber;
+    private String recieverCardNumber;
 
     private BigDecimal amount;
     

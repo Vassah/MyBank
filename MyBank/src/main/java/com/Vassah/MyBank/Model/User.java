@@ -1,17 +1,14 @@
 package com.Vassah.MyBank.Model;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -22,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -56,10 +52,6 @@ public class User implements UserDetails{
 
     private boolean enabled;
 
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER )//, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Account> accounts;
-
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Authority> roles;
 
@@ -67,10 +59,6 @@ public class User implements UserDetails{
     
     public String fullName() { return String.join(" ", firstName, lastName); }
 
-    public void AddAccount (Account account)
-    {
-        accounts.add(account);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

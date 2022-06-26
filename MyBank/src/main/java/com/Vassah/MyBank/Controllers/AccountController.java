@@ -17,16 +17,14 @@ import com.Vassah.MyBank.Model.Account;
 import com.Vassah.MyBank.Model.Transaction;
 import com.Vassah.MyBank.Model.User;
 import com.Vassah.MyBank.Model.AccToAccTransfer;
+import com.Vassah.MyBank.Model.AccToCardTransfer;
+import com.Vassah.MyBank.Model.AccToPhoneTransfer;
 import com.Vassah.MyBank.Services.AccountManager;
 import com.Vassah.MyBank.Services.MoneySender;
-import com.Vassah.MyBank.Services.UserManager;
 
 @PreAuthorize("hasAuthority('User_role')")
 @Controller
 public class AccountController {
-
-    @Autowired
-    private UserManager userManager;
 
     @Autowired
     private AccountManager accManager;
@@ -88,25 +86,46 @@ public class AccountController {
     }
 
     @GetMapping("/user/byphone")
-    public String byPhone(Model model) {
+    public String byPhone(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("transferForm", new AccToPhoneTransfer());
+        model.addAttribute("accounts", accManager.findAccountsByUser(user));
+        model.addAttribute("user", user);
         return "user/byphone";
     }
 
+    @PostMapping("/user/byphone")
+    public String byPhone(@ModelAttribute AccToPhoneTransfer form, Model model)
+    {
+        System.out.println("раньше надо было епта");
+        moneySender.SendMoney(form);
+        return "redirect:/user/profile";
+    }
+
     @GetMapping("/user/bycard")
-    public String byCard(Model model) {
+    public String byCard(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("transferForm", new AccToCardTransfer());
+        model.addAttribute("accounts", accManager.findAccountsByUser(user));
+        model.addAttribute("user", user);
         return "user/bycard";
+    }
+
+    @PostMapping("/user/bycard")
+    public String byCard(@ModelAttribute AccToCardTransfer form, Model model)
+    {
+        moneySender.SendMoney(form);
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/user/self")
     public String Self(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("transferForm", new AccToAccTransfer());
-        model.addAttribute("accounts", user.getAccounts());
+        model.addAttribute("accounts", accManager.findAccountsByUser(user));
         model.addAttribute("user", user);
         return "user/self";
     }
 
     @PostMapping("user/self")
-    public String Self(@ModelAttribute AccToAccTransfer form, @AuthenticationPrincipal User user, Model model)
+    public String Self(@ModelAttribute AccToAccTransfer form, Model model)
     {
         moneySender.SendMoney(form);
         return "redirect:/user/profile";

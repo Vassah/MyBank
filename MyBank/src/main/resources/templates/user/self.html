@@ -27,8 +27,8 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <label for="senderNumber" class="form-label">Откуда :</label>
-                                        <select th:field="*{senderNumber}" class="form-select" id="chooseOption">
+                                        <label for="senderAccNumber" class="form-label">Откуда :</label>
+                                        <select th:field="*{senderAccNumber}" class="form-select" id="chooseOption">
                                             <option th:each="acc : ${accounts}" th:selected="${accStat.first}"
                                                 th:name="${acc.number}" th:text="${acc.number} + '  -   ' + ${acc.balance.toString()} + ${acc.currency.getSymbol()}"
                                                 th:value="${acc.number}"></option>
@@ -37,8 +37,8 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <label for="reciever" class="form-label">Откуда :</label>
-                                        <select th:field="*{recieverNumber}" class="form-select" id="chooseOption">
+                                        <label for="recieverAccNumber" class="form-label">Откуда :</label>
+                                        <select th:field="*{recieverAccNumber}" class="form-select" id="chooseOption">
                                             <option th:each="acc : ${accounts}" th:selected="${accStat.first}"
                                                 th:name="${acc.number}" th:text="${acc.number} + '  -   ' + ${acc.balance.toString()} + ${acc.currency.getSymbol()}"
                                                 th:value="${acc.number}"></option>

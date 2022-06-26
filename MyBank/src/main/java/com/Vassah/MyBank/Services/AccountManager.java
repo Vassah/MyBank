@@ -6,7 +6,6 @@ import com.Vassah.MyBank.Model.Card;
 import com.Vassah.MyBank.Model.User;
 import com.Vassah.MyBank.Repositories.AccountRepository;
 import com.Vassah.MyBank.Repositories.CardRepository;
-import com.Vassah.MyBank.Repositories.UserRepository;
 
 
 import java.math.BigDecimal;
@@ -26,8 +25,7 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class AccountManager {
-    @Autowired
-    private final UserRepository userRepo;
+
     @Autowired
     private final AccountRepository accountRepo;
 
@@ -56,8 +54,6 @@ public class AccountManager {
         debit = card.getAccount();
         debit.setCard(card);
         debit = accountRepo.save(debit);
-        user.AddAccount(debit);
-        userRepo.save(user);
     }
 
     public void credit(User user, String password)
@@ -79,8 +75,6 @@ public class AccountManager {
         credit = card.getAccount();
         credit.setCard(card);
         credit = accountRepo.save(credit);
-        user.AddAccount(credit);
-        userRepo.save(user);
     }
 
     public void deposit(User user, String password)
@@ -102,8 +96,6 @@ public class AccountManager {
         deposit = card.getAccount();
         deposit.setCard(card);
         deposit = accountRepo.save(deposit);
-        user.AddAccount(deposit);
-        userRepo.save(user);
     }
 
     public List<Account> findAccountsByUser(User user)
