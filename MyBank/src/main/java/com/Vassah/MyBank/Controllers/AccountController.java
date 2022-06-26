@@ -11,11 +11,6 @@ public class AccountController {
         return "admin";
     }
 
-    @GetMapping("/user/login")
-    public String LogInAccount()
-    {
-        return "login";
-    }
 
 
     
