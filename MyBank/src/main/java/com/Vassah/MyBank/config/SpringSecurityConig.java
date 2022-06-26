@@ -30,7 +30,7 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("Admin_role")
+                .antMatchers("/admin/**", "/admin").hasAuthority("Admin_role")
                 .antMatchers("/", "/assets/**", "/vendor/**").permitAll()
                 .antMatchers("/registration", "/ConfirmEmail", "/ConfirmEmail/**", "/login").not().fullyAuthenticated()
                 .anyRequest().authenticated()

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +27,6 @@ public class AccountController {
     @Autowired
     private AccountManager accManager;
 
-    @GetMapping("/admin")
-    public String Admin() {
-        return "admin";
-    }
 
     @GetMapping("/user/profile")
     public String profile(@AuthenticationPrincipal User user, Model model) {
@@ -40,7 +38,7 @@ public class AccountController {
         List<Transaction> transactions = new ArrayList<Transaction>();
         if (accounts != null) {
             for (Account acc : accounts) {
-                transactions.addAll(acc.getTransactions() == null? new ArrayList<Transaction>() : acc.getTransactions() );
+                transactions.addAll(acc.getTransactions() == null? new ArrayList<Transaction>() : acc.getTransactions());
                 switch (acc.getStatus()) {
                     case Debit:
                         debits.add(acc);

@@ -61,7 +61,7 @@ public class User implements UserDetails{
     private List<Account> accounts;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Set<Authority> roles;
 
     public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
     

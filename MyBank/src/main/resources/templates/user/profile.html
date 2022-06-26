@@ -69,7 +69,7 @@
                                             <tr th:each="acc : ${debit}">
                                               <td th:text="${acc.getNumber()}"></td>
                                               <td th:text="${acc.getBalance()}"> </td>
-                                              <td th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}"></td>                                            
+                                              <td> <a th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}" th:href="@{/user/card/{id}(id=${acc.card.id})}"> </a></td>                                            
                                             </tr>
                                           </tbody>
                                         </table>
@@ -141,7 +141,7 @@
                                               <td th:text="${acc.getNumber()}"></td>
                                               <td th:text="${acc.getBalance()}"> </td>
                                               <td th:text=" ${acc.multiplicator - 100}">%</td>       
-                                              <td th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}"></td>                                     
+                                              <td> <a th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}" th:href="@{/user/card/{id}(id=${acc.card.id})}"> </a></td>                                     
                                             </tr>
                                           </tbody>
                                         </table>

@@ -2,9 +2,9 @@ package com.Vassah.MyBank.Services;
 
 import java.util.Collections;
 
-import com.Vassah.MyBank.Model.Role;
+import com.Vassah.MyBank.Model.Authority;
 import com.Vassah.MyBank.Model.User;
-import com.Vassah.MyBank.Repositories.RolesRepository;
+import com.Vassah.MyBank.Repositories.AuthorityRepository;
 import com.Vassah.MyBank.Repositories.UserRepository;
 
 import org.slf4j.Logger;
@@ -53,10 +53,10 @@ public class UserManager implements UserDetailsService {
 
     private final BCryptPasswordEncoder passwordEncoder;
 
-    private RolesRepository rolesRepo;
+    private AuthorityRepository rolesRepo;
 
     @Autowired
-    public UserManager(RolesRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder) {
+    public UserManager(AuthorityRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder) {
         rolesRepo = _rrepo;
         userRepo = _urepo;
         passwordEncoder = _encoder;
@@ -66,18 +66,18 @@ public class UserManager implements UserDetailsService {
 
     private void seedRoles() {
         if (!rolesRepo.findByName("User_role").isPresent()) {
-            rolesRepo.save(new Role(1L, "User_role"));
+            rolesRepo.save(new Authority(1L, "User_role"));
         }
 
         if (!rolesRepo.findByName("Admin_role").isPresent()) {
-            rolesRepo.save(new Role(2L, "Admin_role"));
+            rolesRepo.save(new Authority(2L, "Admin_role"));
             User admin = userRepo.findById(1L).isPresent() ? userRepo.findById(1L).get() : new User();
-            admin.setPhoneNumber("+70000000000");
+            admin.setPhoneNumber("+79000000000");
             admin.setPasswordHash(passwordEncoder.encode("6815255"));
             admin.setFirstName("Alexandr");
             admin.setLastName("Vasiliy");
             admin.setEmail("ad.akantev@phystech.edu");
-            admin.setRoles((Collections.singleton(new Role(2L, "Admin_role"))));
+            admin.setRoles((Collections.singleton(new Authority(2L, "Admin_role"))));
             userRepo.save(admin);
         }
        
@@ -105,7 +105,7 @@ public class UserManager implements UserDetailsService {
         if (userFromDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Role(1L, "User_role")));
+        user.setRoles(Collections.singleton(new Authority(1L, "User_role")));
         user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
         return true;
