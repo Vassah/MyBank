@@ -57,7 +57,6 @@ public class AccountController {
                 }
             }
         }
-        System.out.println(transactions);
         transactions.sort((Transaction tr1, Transaction tr2) -> tr2.getProcessTime() != null ? tr2.getProcessTime().compareTo(tr1.getProcessTime()) : -1);
         model.addAttribute("transactions", transactions);
         model.addAttribute("debit", debits);
