@@ -141,13 +141,13 @@ public class UserManager implements UserDetailsService {
         String toAddress = user.getEmail();
         String fromAddress = "mybankapplicationjava@mail.ru";
         String senderName = "My Bank";
-        String subject = "Please verify your registration";
+        String subject = "Подтверждение регистрации";
         String content = "Dear [[name]],<br>"
-                + "Please click the link below to verify your registration:<br>"
-                + "<h3><a href=\"localhost:8080[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "Пожалуйста, перейдите по ссылке ниже чтобы подтвердить регистрацию:<br>"
+                + "<h3><a href=\"localhost:8080[[URL]]\" target=\"_self\">Подтвердить</a></h3>"
                 + "<a href=\"localhost:8080[[URL]]\">localhost:8080[[URL]] </a><br>"
-                + "Thank you,<br>"
-                + "My Bank";
+                + "Благодарим вас,<br>"
+                + "команда My Bank";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);

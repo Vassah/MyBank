@@ -52,7 +52,7 @@ public class User implements UserDetails{
 
     private String verificationCode;
 
-    private boolean enabled = false;
+    private boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Authority> authorities;
