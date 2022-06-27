@@ -50,10 +50,12 @@ public class User implements UserDetails{
     @Transient
     private String passwordConfirmHash;
 
-    private boolean enabled;
+    private String verificationCode;
+
+    private boolean enabled = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Authority> roles;
+    private Set<Authority> authorities;
 
     public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
     
@@ -62,7 +64,7 @@ public class User implements UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return authorities;
     }
 
     @Override
@@ -92,7 +94,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
 }

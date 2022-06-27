@@ -32,7 +32,7 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/admin/**", "/admin").hasAuthority("Admin_role")
                 .antMatchers("/", "/assets/**", "/vendor/**").permitAll()
-                .antMatchers("/registration", "/ConfirmEmail", "/ConfirmEmail/**", "/login").not().fullyAuthenticated()
+                .antMatchers("/registration", "/ConfirmEmail", "/ConfirmEmail/**", "/login", "/verify").not().fullyAuthenticated()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .defaultSuccessUrl("/user/profile").failureUrl("/login?error=true")

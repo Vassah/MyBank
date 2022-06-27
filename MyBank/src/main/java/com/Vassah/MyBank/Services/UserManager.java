@@ -1,6 +1,10 @@
 package com.Vassah.MyBank.Services;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import com.Vassah.MyBank.Model.Authority;
 import com.Vassah.MyBank.Model.User;
@@ -10,6 +14,8 @@ import com.Vassah.MyBank.Repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 
 @Service
 @Component
@@ -25,6 +32,15 @@ import lombok.AllArgsConstructor;
 public class UserManager implements UserDetailsService {
 
     private static Logger logger = LoggerFactory.getLogger(UserManager.class);
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    private final UserRepository userRepo;
+
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    private AuthorityRepository rolesRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -49,12 +65,6 @@ public class UserManager implements UserDetailsService {
         return user;
     }
 
-    private final UserRepository userRepo;
-
-    private final BCryptPasswordEncoder passwordEncoder;
-
-    private AuthorityRepository rolesRepo;
-
     @Autowired
     public UserManager(AuthorityRepository _rrepo, UserRepository _urepo, BCryptPasswordEncoder _encoder) {
         rolesRepo = _rrepo;
@@ -68,7 +78,6 @@ public class UserManager implements UserDetailsService {
         if (!rolesRepo.findByName("User_role").isPresent()) {
             rolesRepo.save(new Authority(1L, "User_role"));
         }
-
         if (!rolesRepo.findByName("Admin_role").isPresent()) {
             rolesRepo.save(new Authority(2L, "Admin_role"));
             User admin = userRepo.findById(1L).isPresent() ? userRepo.findById(1L).get() : new User();
@@ -77,11 +86,10 @@ public class UserManager implements UserDetailsService {
             admin.setFirstName("Alexandr");
             admin.setLastName("Vasiliy");
             admin.setEmail("ad.akantev@phystech.edu");
-            admin.setRoles((Collections.singleton(new Authority(2L, "Admin_role"))));
+            admin.setEnabled(true);
+            admin.setAuthorities((Collections.singleton(new Authority(2L, "Admin_role"))));
             userRepo.save(admin);
         }
-       
-
     }
 
     public void sendPhoneCode(String phoneNumber) {
@@ -96,7 +104,8 @@ public class UserManager implements UserDetailsService {
         userRepo.save(user);
     }
 
-    public boolean registerUser(User user) {
+    public boolean registerUser(User user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
         User userFromDB = userRepo.findByPhoneNumber(user.getUsername());
         if (userFromDB != null) {
             return false;
@@ -105,9 +114,11 @@ public class UserManager implements UserDetailsService {
         if (userFromDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(new Authority(1L, "User_role")));
+        user.setAuthorities(Collections.singleton(new Authority(1L, "User_role")));
         user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+        user.setVerificationCode(RandomString.make(64));
         userRepo.save(user);
+        sendVerificationEmail(user, siteURL);
         return true;
     }
 
@@ -117,5 +128,47 @@ public class UserManager implements UserDetailsService {
             return true;
         }
         return false;
+    }
+
+    private void sendVerificationEmail(User user, String siteURL)
+            throws MessagingException, UnsupportedEncodingException {
+        String toAddress = user.getEmail();
+        String fromAddress = "postmaster@sandbox642e49d9911e4f35b87b9e244994e39e.mailgun.org";
+        String senderName = "My Bank";
+        String subject = "Please verify your registration";
+        String content = "Dear [[name]],<br>"
+                + "Please click the link below to verify your registration:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "[[URL]] <br>"
+                + "Thank you,<br>"
+                + "My Bank";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.fullName());
+        String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+
+        content = content.replace("[[URL]]", verifyURL);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+    }
+
+    public boolean verify(String verificationCode) {
+        User user = userRepo.findByVerificationCode(verificationCode);
+        if (user == null || user.isEnabled()) {
+            return false;
+        }
+        user.setVerificationCode(null);
+        user.setEnabled(true);
+        userRepo.save(user);
+        return true;
+
     }
 }
