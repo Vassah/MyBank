@@ -144,8 +144,8 @@ public class UserManager implements UserDetailsService {
         String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
                 + "Please click the link below to verify your registration:<br>"
-                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
-                + "[[URL]] <br>"
+                + "<h3><a href=\"localhost:8080[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "<a href=\"localhost:8080[[URL]]\">localhost:8080[[URL]] </a><br>"
                 + "Thank you,<br>"
                 + "My Bank";
 

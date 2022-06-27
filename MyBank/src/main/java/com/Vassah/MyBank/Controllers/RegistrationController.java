@@ -40,7 +40,7 @@ public class RegistrationController {
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "/registration";
         }
-        if (!userManager.registerUser(userForm, request.getServletPath())) {
+        if (!userManager.registerUser(userForm, getSiteURL(request))) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "/registration";
         }
@@ -50,17 +50,21 @@ public class RegistrationController {
     @GetMapping("/verify")
     public String verifyUser(@RequestParam("code") String code) {
         if (userManager.verify(code)) {
-            return "redirect:/EmailConfirmed";
+            return "redirect:/ConfirmEmail/success";
         } else {
-            return "redirect:/EmailConfirmFailed";
+            return "redirect:/ConfirmEmail/fail";
         }
     }
 
     @GetMapping("/sendagain")
     public String sendEmailAgain(@RequestParam("email") String email, HttpServletRequest request)
-                throws UnsupportedEncodingException, MessagingException {
-        userManager.SendCodeAgain(email, request.getServletPath());
+            throws UnsupportedEncodingException, MessagingException {
+        userManager.SendCodeAgain(email, getSiteURL(request));
         return "redirect:/ConfirmEmail";
     }
 
+    private String getSiteURL(HttpServletRequest request)
+    {
+        return request.getRequestURI().replace(request.getServletPath(), "");
+    }
 }
