@@ -1,11 +1,14 @@
 package com.Vassah.MyBank.Model;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +20,7 @@ import java.util.Currency;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "transactions")
 public class Transaction{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,11 +30,13 @@ public class Transaction{
 
     private BigDecimal amount;
 
+    @Column(name="sender_number")
     private long senderAccountNumber;
     
+    @Column(name="reciever_number")
     private long recieverAccountNumber;
     
-    private OffsetDateTime proccesTime;
+    private OffsetDateTime processTime;
 
     private TransactionType transactionType;
 
@@ -40,5 +46,20 @@ public class Transaction{
         recieverAccountNumber = _recieverAccNum;
         amount = _amount;
         currency = _currency;
+    }
+
+    public String getTime()
+    {
+        return processTime.format(DateTimeFormatter.ofPattern("hh:mm"));
+    }
+
+    public String getDate()
+    {
+        return processTime.format(DateTimeFormatter.ofPattern("d MMM uuuu"));
+    }
+
+    public String getDateTime()
+    {
+        return processTime.format(DateTimeFormatter.ofPattern("hh:mm, d MMM uuuu"));
     }
 }

@@ -1,7 +1,5 @@
 package com.Vassah.MyBank.config;
 
-import com.Vassah.MyBank.Services.UserDetailsServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +12,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.Vassah.MyBank.Services.UserManager;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
@@ -22,7 +22,7 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
     private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-	private UserDetailsServiceImpl userDetailsService;
+	private UserManager userDetailsService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -30,9 +30,12 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("Admin")
+                .antMatchers("/admin/**", "/admin").hasAuthority("Admin_role")
+                .antMatchers("/", "/assets/**", "/vendor/**").permitAll()
+                .antMatchers("/registration", "/sendagain", "/ConfirmEmail/**", "/login", "/verify").not().fullyAuthenticated()
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
-                .defaultSuccessUrl("/user").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/user/profile").failureUrl("/login?error=true")
                 .and().logout().logoutUrl("/logout").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and().rememberMe().tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(1 * 24 * 60 * 60); //24 hours

@@ -1,35 +1,34 @@
 package com.Vassah.MyBank.Model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
-public class Role implements GrantedAuthority{
+@Table(name="authorities")
+@NoArgsConstructor
+public class Authority implements GrantedAuthority{
     
-    @GeneratedValue
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String name;
-
-    @Transient
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    
     @Override
     public String getAuthority()
     {
         return name;
+    }
+    public Authority(long l, String string) {
+        id = l; name = string;
     }
 }

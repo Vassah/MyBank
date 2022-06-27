@@ -1,7 +1,6 @@
 package com.Vassah.MyBank.Model;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -10,8 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -28,12 +27,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(uniqueConstraints = {
-    @UniqueConstraint(name="phoneNumber", columnNames = "phoneNumber")
-})
+    @UniqueConstraint(name="phoneNumber", columnNames = "phoneNumber"),
+    @UniqueConstraint(name="email", columnNames = "email")
+}, name = "users")
 public class User implements UserDetails{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
+
+    private String phoneNumber;
+
+    private String email;
 
     private String firstName;
 
@@ -43,28 +47,30 @@ public class User implements UserDetails{
 
     private String passwordHash;
 
-    private String phoneNumber;
+    @Transient
+    private String passwordConfirmHash;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Account> accounts = new HashSet<Account>();
+    private String verificationCode;
+
+    @Column(name = "enabled")
+    private boolean enabled;
+    
+    public User() {
+        super();
+        this.enabled=false;
+    }
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Set<Authority> authorities;
 
-    public Long getId(){return id;}
-
-    public String shortName() { return lastName + String.valueOf(firstName.toCharArray()[0]) + ".";}
+    public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
     
-    public String fullName() { return firstName + middleName + lastName; }
+    public String fullName() { return String.join(" ", firstName, lastName); }
 
-    public void AddAccount (Account account)
-    {
-        accounts.add(account);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return authorities;
     }
 
     @Override
@@ -94,7 +100,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
 }

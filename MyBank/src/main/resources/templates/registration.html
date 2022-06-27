@@ -1,63 +1,88 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
-    <head></head>
-    <body>
-          <div layout:fragment="content">
-              <div class="page-heading">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="header-text">
-                        <h2>Регистрация пользователя</h2>
-                        <div class="div-dec"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
 
-            <section class="calculator2" align="center">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-5">
-                    <div class="section-heading">
-                      <h4>Регистрация нового пользователя</h4>
+<head></head>
+
+<body>
+  <div layout:fragment="content">
+    <div class="page-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="header-text">
+              <h2>Регистрация пользователя</h2>
+              <div class="div-dec"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <form id="calculate" th:action="@{/registration}" method="POST" th:object="${userForm}">
+              <div class="row">
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="firstName">Ваше имя:</label>
+                    <input type="text" th:field="*{firstName}" id="name" placeholder="Иван" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="lastName">Ваша фамилия:</label>
+                    <input type="text" th:field="*{lastName}" id="name" placeholder="Иванов" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="phoneNumber">Ваш номер телефона</label>
+                    <input type="tel" th:field="*{phoneNumber}" pattern="\+79\d{9}" placeholder="+7912 345 67 89"
+                      autocomplete="on" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="email">Ваш Email:</label>
+                    <input type="email" th:field="*{email}" id="email" pattern="[^ @]*@[^ @]*\.[^ @]*"
+                      placeholder="ivan_ivanov@example.com" autocomplete="on" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="passwordHash">Ваш пароль:</label>
+                    <input type="password" th:field="*{passwordHash}" placeholder="" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <label for="passwordConfirmHash">Ваш пароль ещё раз: </label>
+                    <input type="password" th:field="*{passwordConfirmHash}" placeholder="" required="">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6 offset-lg-4">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="green-button">Зарегистрироваться</button>
+                  </fieldset>
+                </div>
+                <div class="col-lg-6 offset-lg-5">
+                  <fieldset>
+                    <br>
+                    <div class="orange-button">
+                      <a href="/login">Зарегистрироваться</a>
                     </div>
-                    <form id="calculate" th:method="POST" th:action="@{/registration}" th:object="${user}">
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <fieldset>
-                            <label for="name"><font color="black">Ваше имя:</font></label>
-                            <input type="name" th:field="*{firstName}" id="name" placeholder="" autocomplete="on" required>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-6">
-                          <fieldset>
-                            <label for="surname"><font color="black">Ваша фамилия:</font></label>
-                            <input type="text" th:field="*{lastName}" id="surname" placeholder="" autocomplete="on" required>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-6">
-                          <fieldset>
-                            <label for="password"><font color="black">Ваш пароль:</font></label>
-                            <input type="password" th:field="*{passwordHash}" id="password" placeholder="" autocomplete="on" required>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-12">
-                          <fieldset>
-                            <button type="submit" id="form-submit" class="orange-button">Зарегистрироваться</button>
-                          </fieldset>
-                          <fieldset>
-                            <a href="#" onclick="history.back();return false;" class="history.back">Вернуться на главную страницу</a>
-                          </fieldset>
-                        </div>
-                      </div>
-                    </form>
-                  </div> 
+                  </fieldset>
                 </div>
               </div>
-            </section>
-          <br>
+            </form>
+          </div>
         </div>
-    </body>
+      </div>
+    </section>
+    <br>
+  </div>
+</body>
+
 </html>
