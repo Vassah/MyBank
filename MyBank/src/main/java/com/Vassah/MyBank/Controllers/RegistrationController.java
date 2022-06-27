@@ -56,4 +56,11 @@ public class RegistrationController {
         }
     }
 
+    @GetMapping("/sendagain")
+    public String sendEmailAgain(@RequestParam("email") String email, HttpServletRequest request)
+                throws UnsupportedEncodingException, MessagingException {
+        userManager.SendCodeAgain(email, request.getServletPath());
+        return "redirect:/ConfirmEmail";
+    }
+
 }

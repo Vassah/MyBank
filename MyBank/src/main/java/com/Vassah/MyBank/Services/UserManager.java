@@ -130,10 +130,16 @@ public class UserManager implements UserDetailsService {
         return false;
     }
 
+    public void SendCodeAgain(String email, String siteURL)
+    throws MessagingException, UnsupportedEncodingException {
+        var user = userRepo.findByEmail(email);
+        sendVerificationEmail(user, siteURL);
+    }
+
     private void sendVerificationEmail(User user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getEmail();
-        String fromAddress = "postmaster@sandbox642e49d9911e4f35b87b9e244994e39e.mailgun.org";
+        String fromAddress = "mybankapplicationjava@mail.ru";
         String senderName = "My Bank";
         String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
