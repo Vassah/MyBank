@@ -43,7 +43,7 @@ public class AccountController {
         List<Transaction> transactions = new ArrayList<Transaction>();
         if (accounts != null) {
             for (Account acc : accounts) {
-                transactions.addAll(acc.getTransactions() == null? new ArrayList<Transaction>() : acc.getTransactions());
+                transactions.addAll(acc.getTransactions());
                 switch (acc.getStatus()) {
                     case Debit:
                         debits.add(acc);
@@ -57,7 +57,8 @@ public class AccountController {
                 }
             }
         }
-        transactions.sort((Transaction tr1, Transaction tr2) -> tr1.getProccesTime().compareTo(tr2.getProccesTime()));
+        System.out.println(transactions);
+        transactions.sort((Transaction tr1, Transaction tr2) -> tr2.getProcessTime() != null ? tr2.getProcessTime().compareTo(tr1.getProcessTime()) : -1);
         model.addAttribute("transactions", transactions);
         model.addAttribute("debit", debits);
         model.addAttribute("credit", credits);
@@ -96,7 +97,6 @@ public class AccountController {
     @PostMapping("/user/byphone")
     public String byPhone(@ModelAttribute AccToPhoneTransfer form, Model model)
     {
-        System.out.println("раньше надо было епта");
         moneySender.SendMoney(form);
         return "redirect:/user/profile";
     }

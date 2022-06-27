@@ -1565,6 +1565,13 @@ section.service-details ul.nacc li.active {
   transform: translateX(0px);
 }
 
+section.service-details td.money{
+  font-size: large;
+  font-style: italic;
+  color:#181d30;
+}
+
+
 
 
 /* 

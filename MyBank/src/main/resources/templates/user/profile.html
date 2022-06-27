@@ -68,7 +68,7 @@
                                           <tbody>
                                             <tr th:each="acc : ${debit}">
                                               <td th:text="${acc.getNumber()}"></td>
-                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text="${acc.getBalance()}" class="money"> </td>
                                               <td> <a th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}" th:href="@{/user/card/{id}(id=${acc.card.id})}"> </a></td>                                            
                                             </tr>
                                           </tbody>
@@ -103,7 +103,7 @@
                                           <tbody>
                                             <tr th:each="acc : ${deposit}">
                                               <td th:text="${acc.getNumber()}"></td>
-                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text="${acc.getBalance()}" class="money"> </td>
                                               <td th:text=" ${acc.multiplicator - 100}">%</td>                                            
                                             </tr>
                                           </tbody>
@@ -139,7 +139,7 @@
                                           <tbody>
                                             <tr th:each="acc : ${credit}">
                                               <td th:text="${acc.getNumber()}"></td>
-                                              <td th:text="${acc.getBalance()}"> </td>
+                                              <td th:text="${acc.getBalance()}" class="money"> </td>
                                               <td th:text=" ${acc.multiplicator - 100}">%</td>       
                                               <td> <a th:text="${acc.card == null} ? '-' : ${acc.card.getNumber()}" th:href="@{/user/card/{id}(id=${acc.card.id})}"> </a></td>                                     
                                             </tr>
@@ -164,7 +164,7 @@
                                         <em>01</em>
                                         <h4>Между своими</h4>
                                         <p>
-                                          Переводите между любыми своими счетами,вкладами и картами
+                                          Переводите между любыми своими счетами, вкладами и картами
                                         </p>
                                       </div>
                                     </a>
@@ -212,15 +212,25 @@
                             <h3>У вас ещё нет истории</h3>
                           </div>
                           <div th:if="${!transactions.isEmpty()}">
-                            <ul>
-                              <th:block th:each="tr : ${transactions}">
-                                <li>
-                                  <p>
-                                    <span th:text="${tr.getAmount()}"></span>
-                                  </p>
-                                </li>
-                              </th:block>
-                            </ul>
+                            <div class="col-lg-12">
+                              <table class="table">
+                                <thead calss="thead-dark">
+                                  <th scope="col"> Отправитель</th>
+                                  <th scope="col"> Получатель </th>
+                                  <th scope="col"> Сумма </th>
+                                  <th scope="col"> Время</th>
+                                  <th scope="col"> Дата</th>
+                                </thead>
+                                <tbody>
+                                  <tr th:each="tr : ${transactions}">
+                                    <td th:text="${tr.getSenderAccountNumber()}"></td>
+                                    <td th:text="${tr.getRecieverAccountNumber()}"></td>
+                                    <td class="money" th:text="${tr.getAmount()} + ${tr.currency.getSymbol()}" > </td>
+                                    <td th:text="${tr.getTime()}"></td>     
+                                    <td th:text="${tr.getDate()}"></td>     
+                                  </tr>
+                                </tbody>
+                              </table>
                           </div>
                         </div>
                       </li>

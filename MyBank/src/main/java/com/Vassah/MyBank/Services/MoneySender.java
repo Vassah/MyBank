@@ -34,19 +34,18 @@ public class MoneySender implements Sendable {
 
     @Autowired
     UserRepository userRepo;
-    
+
     @Autowired
     CardRepository cardRepo;
 
-    private Transaction CreateTransaction(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount,
-            Currency currency) {
+    private Transaction CreateTransaction(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount, Currency currency) {
         var transaction = new Transaction(senderAccountNumber, recieverAccountNumber, amount, currency);
-        transaction.setProccesTime(OffsetDateTime.now());
+        transaction.setProcessTime(OffsetDateTime.now());
         return transaction;
     }
 
-    public boolean SendMoney(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount,
-            Currency currency) {
+    public boolean SendMoney(long senderAccountNumber, long recieverAccountNumber, BigDecimal amount, Currency currency) {
+        /*
         Account sender = accRepo.findById(senderAccountNumber).get();
         if (accRepo.findById(recieverAccountNumber).isPresent()) {
             Account reciever = accRepo.findById(recieverAccountNumber).get();
@@ -64,7 +63,7 @@ public class MoneySender implements Sendable {
                 }
             }
             return false;
-        }
+        } */
         return false;
     }
 
@@ -80,45 +79,37 @@ public class MoneySender implements Sendable {
                     transaction.setTransactionType(TransactionType.MyBankOnly);
                     transaction = transactionRepo.save(transaction);
 
-                    sender.addTransaction(transaction);
+                    sender.addSendTransaction(transaction);
                     sender.setBalance(sender.getBalance().subtract(transfer.getAmount()));
                     accRepo.save(sender);
 
-                    reciever.addTransaction(transaction);
+                    reciever.addRecieveTransaction(transaction);
                     reciever.setBalance(reciever.getBalance().add(transfer.getAmount()));
                     accRepo.save(reciever);
 
                     return true;
                 }
             }
-            return false;
         }
         return false;
     }
 
     public boolean SendMoney(AccToPhoneTransfer transfer) {
-        System.out.println("тест епта");
         Account sender = accRepo.findById(transfer.getSenderAccNumber()).get();
-        System.out.println("успех епта");
         var receiverUser = userRepo.findByPhoneNumber(transfer.getRecieverPhoneNumber());
-        if (receiverUser != null) 
-        {
+        if (receiverUser != null) {
             var possibleAccs = accRepo.findByUser(receiverUser);
             var currency = sender.getCurrency();
-            if (!possibleAccs.isEmpty()) 
-            {
+            if (!possibleAccs.isEmpty()) {
                 possibleAccs.sort((Account a1, Account a2) -> a1.getBalance().compareTo(a2.getBalance()));
                 Account recieverAcc = null;
-                for (Account acc : possibleAccs)
-                {
-                    if (acc.getCurrency() == currency)
-                    {
+                for (Account acc : possibleAccs) {
+                    if (acc.getCurrency() == currency) {
                         recieverAcc = acc;
                         break;
                     }
                 }
-                if (recieverAcc != null) 
-                {
+                if (recieverAcc != null) {
                     if (sender.getBalance().add(transfer.getAmount().negate())
                             .compareTo(sender.getBalanceLimit()) == 1) {
                         var transaction = CreateTransaction(transfer.getSenderAccNumber(),
@@ -126,11 +117,11 @@ public class MoneySender implements Sendable {
                         transaction.setTransactionType(TransactionType.MyBankOnly);
                         transaction = transactionRepo.save(transaction);
 
-                        sender.addTransaction(transaction);
+                        sender.addSendTransaction(transaction);
                         sender.setBalance(sender.getBalance().subtract(transfer.getAmount()));
-                        accRepo.save(sender);
+                        sender = accRepo.save(sender);
 
-                        recieverAcc.addTransaction(transaction);
+                        recieverAcc.addRecieveTransaction(transaction);
                         recieverAcc.setBalance(recieverAcc.getBalance().add(transfer.getAmount()));
                         accRepo.save(recieverAcc);
 
@@ -146,29 +137,27 @@ public class MoneySender implements Sendable {
         Account sender = accRepo.findById(transfer.getSenderAccNumber()).get();
         Long cardNumber = Long.parseLong(transfer.getRecieverCardNumber().substring(8));
         var reciever = accRepo.findByCard(cardRepo.findById(cardNumber).get());
-        if (reciever != null) 
-        {
-                if(sender.getCurrency() == reciever.getCurrency())
-                {
-                    var currency = sender.getCurrency();
-                    if (sender.getBalance().add(transfer.getAmount().negate())
-                            .compareTo(sender.getBalanceLimit()) == 1) {
-                        var transaction = CreateTransaction(transfer.getSenderAccNumber(),
-                                reciever.getNumber(), transfer.getAmount(), currency);
-                        transaction.setTransactionType(TransactionType.MyBankOnly);
-                        transaction = transactionRepo.save(transaction);
+        if (reciever != null) {
+            if (sender.getCurrency() == reciever.getCurrency()) {
+                var currency = sender.getCurrency();
+                if (sender.getBalance().add(transfer.getAmount().negate())
+                        .compareTo(sender.getBalanceLimit()) == 1) {
+                    var transaction = CreateTransaction(transfer.getSenderAccNumber(),
+                            reciever.getNumber(), transfer.getAmount(), currency);
+                    transaction.setTransactionType(TransactionType.MyBankOnly);
+                    transaction = transactionRepo.save(transaction);
 
-                        sender.addTransaction(transaction);
-                        sender.setBalance(sender.getBalance().subtract(transfer.getAmount()));
-                        accRepo.save(sender);
+                    sender.addSendTransaction(transaction);
+                    sender.setBalance(sender.getBalance().subtract(transfer.getAmount()));
+                    accRepo.save(sender);
 
-                        reciever.addTransaction(transaction);
-                        reciever.setBalance(reciever.getBalance().add(transfer.getAmount()));
-                        accRepo.save(reciever);
+                    reciever.addRecieveTransaction(transaction);
+                    reciever.setBalance(reciever.getBalance().add(transfer.getAmount()));
+                    accRepo.save(reciever);
 
-                        return true;
-                    }
+                    return true;
                 }
+            }
         }
         return false;
     }
