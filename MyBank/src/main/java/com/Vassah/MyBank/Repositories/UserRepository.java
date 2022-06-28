@@ -1,7 +1,7 @@
-package com.Vassah.MyBank.Repositories;
+package com.Vassah.MyBank.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long>{
 

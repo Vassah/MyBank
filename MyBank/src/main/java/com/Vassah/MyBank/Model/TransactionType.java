@@ -1,7 +1,7 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 
 public enum TransactionType {
-    MyBankOnly,
-    ToOtherBank,
-    FromOtherBank
+    MY_BANK_ONLY,
+    TO_OTHER_BANK,
+    FROM_OTHER_BANK
 }

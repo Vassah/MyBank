@@ -1,7 +1,7 @@
-package com.Vassah.MyBank.Controllers;
+package com.Vassah.MyBank.сontrollers;
 
-import com.Vassah.MyBank.Model.User;
-import com.Vassah.MyBank.Services.UserManager;
+import com.Vassah.MyBank.model.User;
+import com.Vassah.MyBank.services.UserManager;
 
 import java.io.UnsupportedEncodingException;
 
@@ -59,7 +59,7 @@ public class RegistrationController {
     @GetMapping("/sendagain")
     public String sendEmailAgain(@RequestParam("email") String email, HttpServletRequest request)
             throws UnsupportedEncodingException, MessagingException {
-        userManager.SendCodeAgain(email, getSiteURL(request));
+        userManager.sendCodeAgain(email, getSiteURL(request));
         return "redirect:/ConfirmEmail";
     }
 

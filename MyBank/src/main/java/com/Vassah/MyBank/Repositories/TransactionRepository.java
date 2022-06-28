@@ -1,8 +1,8 @@
-package com.Vassah.MyBank.Repositories;
+package com.Vassah.MyBank.repositories;
 
 //import java.util.Collection;
 //import java.time.OffsetDateTime;
-import com.Vassah.MyBank.Model.Transaction;
+import com.Vassah.MyBank.model.Transaction;
 
 //import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

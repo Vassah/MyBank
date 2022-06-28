@@ -1,9 +1,9 @@
-package com.Vassah.MyBank.Repositories;
+package com.Vassah.MyBank.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import com.Vassah.MyBank.Model.Account;
-import com.Vassah.MyBank.Model.User;
-import com.Vassah.MyBank.Model.Card;
+import com.Vassah.MyBank.model.Account;
+import com.Vassah.MyBank.model.User;
+import com.Vassah.MyBank.model.Card;
 
 import java.util.List;
 

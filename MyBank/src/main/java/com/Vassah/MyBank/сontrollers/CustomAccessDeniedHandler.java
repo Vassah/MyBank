@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Controllers;
+package com.Vassah.MyBank.сontrollers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

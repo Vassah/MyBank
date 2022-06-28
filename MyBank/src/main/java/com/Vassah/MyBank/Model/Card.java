@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

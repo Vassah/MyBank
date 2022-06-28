@@ -1,7 +1,7 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 
 public enum AccountStatus {
-    Credit,
-    Deposit,
-    Debit
+    DEBIT,
+    CREDIT,
+    DEPOSIT
 }

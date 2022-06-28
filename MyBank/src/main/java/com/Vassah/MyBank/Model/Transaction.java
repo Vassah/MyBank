@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;

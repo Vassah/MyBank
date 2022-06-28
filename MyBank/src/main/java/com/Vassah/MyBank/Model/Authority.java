@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

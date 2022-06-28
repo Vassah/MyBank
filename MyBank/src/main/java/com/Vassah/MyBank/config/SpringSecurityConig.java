@@ -12,7 +12,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import com.Vassah.MyBank.Services.UserManager;
+import com.Vassah.MyBank.services.UserManager;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +38,7 @@ public class SpringSecurityConig extends WebSecurityConfigurerAdapter{
                 .defaultSuccessUrl("/user/profile").failureUrl("/login?error=true")
                 .and().logout().logoutUrl("/logout").permitAll()
                 .and().exceptionHandling().accessDeniedHandler(accessDeniedHandler)
-                .and().rememberMe().tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(1 * 24 * 60 * 60); //24 hours
+                .and().rememberMe().tokenRepository(this.persistentTokenRepository()).tokenValiditySeconds(60 * 60); //1 hour
     }
 
     @Autowired

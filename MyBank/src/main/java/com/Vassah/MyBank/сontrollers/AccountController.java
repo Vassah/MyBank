@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Controllers;
+package com.Vassah.MyBank.сontrollers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Vassah.MyBank.Model.Account;
-import com.Vassah.MyBank.Model.Transaction;
-import com.Vassah.MyBank.Model.User;
-import com.Vassah.MyBank.Model.AccToAccTransfer;
-import com.Vassah.MyBank.Model.AccToCardTransfer;
-import com.Vassah.MyBank.Model.AccToPhoneTransfer;
-import com.Vassah.MyBank.Services.AccountManager;
-import com.Vassah.MyBank.Services.MoneySender;
+import com.Vassah.MyBank.model.Account;
+import com.Vassah.MyBank.model.AccountStatus;
+import com.Vassah.MyBank.model.Transaction;
+import com.Vassah.MyBank.model.User;
+import com.Vassah.MyBank.services.AccountManager;
+import com.Vassah.MyBank.services.MoneySender;
+import com.Vassah.MyBank.model.AccToAccTransfer;
+import com.Vassah.MyBank.model.AccToCardTransfer;
+import com.Vassah.MyBank.model.AccToPhoneTransfer;
 
 @PreAuthorize("hasAuthority('User_role')")
 @Controller
@@ -45,13 +46,13 @@ public class AccountController {
             for (Account acc : accounts) {
                 transactions.addAll(acc.getTransactions());
                 switch (acc.getStatus()) {
-                    case Debit:
+                    case DEBIT:
                         debits.add(acc);
                         break;
-                    case Credit:
+                    case CREDIT:
                         credits.add(acc);
                         break;
-                    case Deposit:
+                    case DEPOSIT:
                         deposits.add(acc);
                         break;
                 }
@@ -66,19 +67,19 @@ public class AccountController {
     }
 
     @GetMapping("/user/newaccount")
-    public String newAccount(@RequestParam(required = false, name = "card") String card, @AuthenticationPrincipal User user, Model model) {
+    public String newAccount(@RequestParam(required = false, name = "card") AccountStatus card, @AuthenticationPrincipal User user, Model model) {
         if (card == null) {
             return "user/newaccount";
         }
        switch(card)
        {
-        case "debit": 
+        case DEBIT: 
             accManager.debit(user, "1234");
             return "user/success";
-        case "deposit": 
+        case DEPOSIT: 
             accManager.deposit(user, "1234");
             return "user/success";
-        case "credit": 
+        case CREDIT: 
             accManager.credit(user, "1234");
             return "user/success";
         default: return "user/newaccount";
@@ -96,7 +97,7 @@ public class AccountController {
     @PostMapping("/user/byphone")
     public String byPhone(@ModelAttribute AccToPhoneTransfer form, Model model)
     {
-        moneySender.SendMoney(form);
+        moneySender.sendMoney(form);
         return "redirect:/user/profile";
     }
 
@@ -111,12 +112,12 @@ public class AccountController {
     @PostMapping("/user/bycard")
     public String byCard(@ModelAttribute AccToCardTransfer form, Model model)
     {
-        moneySender.SendMoney(form);
+        moneySender.sendMoney(form);
         return "redirect:/user/profile";
     }
 
     @GetMapping("/user/self")
-    public String Self(@AuthenticationPrincipal User user, Model model) {
+    public String self(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("transferForm", new AccToAccTransfer());
         model.addAttribute("accounts", accManager.findAccountsByUser(user));
         model.addAttribute("user", user);
@@ -124,9 +125,9 @@ public class AccountController {
     }
 
     @PostMapping("user/self")
-    public String Self(@ModelAttribute AccToAccTransfer form, Model model)
+    public String self(@ModelAttribute AccToAccTransfer form, Model model)
     {
-        moneySender.SendMoney(form);
+        moneySender.sendMoney(form);
         return "redirect:/user/profile";
     }
 

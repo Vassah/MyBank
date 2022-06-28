@@ -1,4 +1,4 @@
-package com.Vassah.MyBank.Model;
+package com.Vassah.MyBank.model;
 
 import java.util.Collection;
 import java.util.Set;
@@ -57,7 +57,7 @@ public class User implements UserDetails{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Authority> authorities;
 
-    public String shortName() { return lastName + " " + String.valueOf(firstName.toCharArray()[0]) + ".";}
+    public String shortName() { return lastName + " " + firstName.charAt(0) + ".";}
     
     public String fullName() { return String.join(" ", firstName, lastName); }
 

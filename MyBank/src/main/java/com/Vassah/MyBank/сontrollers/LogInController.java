@@ -1,24 +1,24 @@
-package com.Vassah.MyBank.Controllers;
+package com.Vassah.MyBank.сontrollers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.Vassah.MyBank.Model.User;
+import com.Vassah.MyBank.model.User;
 
 @Controller
 public class LogInController {
 
     @GetMapping("/user/login")
-    public String LogInAccount(Model model)
+    public String logInAccount(Model model)
     {
         model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping("/user/login")
-    public String LogInAccount()
+    public String logInAccount()
     {
         return "redirect:/profile";
     }
