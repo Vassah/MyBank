@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MyBankApplication",
+            "request": "launch",
+            "mainClass": "com.vassah.my_bank.MyBankApplication",
+            "projectName": "MyBank"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
