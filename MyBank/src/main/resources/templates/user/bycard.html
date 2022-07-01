@@ -30,7 +30,7 @@
                                         <label for="senderNumber" class="form-label">Откуда :</label>
                                         <select th:field="*{senderAccNumber}" class="form-select" id="chooseOption">
                                             <option th:each="acc : ${accounts}" th:selected="${accStat.first}"
-                                                th:name="${acc.number}" th:text="${acc.number} + '  -   ' + ${acc.balance.toString()} + ${acc.currency.getSymbol()}"
+                                                th:name="${acc.number}" th:text="${acc.number} + '  -   ' + ${acc.balance} + ${acc.currency.getSymbol()} + '  min:' + ${acc.balanceLimit}"
                                                 th:value="${acc.number}"></option>
                                         </select>
                                     </fieldset>

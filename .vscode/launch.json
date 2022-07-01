@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch MyBankApplication",
             "request": "launch",
+            "mainClass": "com.vassah.myBank.MyBankApplication",
+            "projectName": "MyBank"
+        },
+        {
+            "type": "java",
+            "name": "Launch MyBankApplication",
+            "request": "launch",
             "mainClass": "com.vassah.my_bank.MyBankApplication",
             "projectName": "MyBank"
         },
